@@ -1,0 +1,19 @@
+.header {
+  background: #2980b9;
+  padding: 0 10px;
+  color: white;
+  height: 60px;
+}
+
+.header_link {
+  padding: 0 8px;
+  color: white;
+  border-left: 1px solid white;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.header_link:hover {
+  background: white;
+  color: black;
+}
