@@ -6,9 +6,9 @@
 }
 
 .header_link {
-  padding: 0 8px;
+  padding: 0 16px;
   color: white;
-  border-left: 1px solid white;
+
   height: 60px;
   display: flex;
   align-items: center;
