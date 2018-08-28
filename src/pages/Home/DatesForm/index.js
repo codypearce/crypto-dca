@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import "./index.css";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+
+import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 
 class DatesForm extends Component {
 	state = {
@@ -28,6 +32,10 @@ class DatesForm extends Component {
 					placeholder="How much?"
 					type="number"
 					onChange={e => this._updateValue("amount", e)}
+				/>
+				<DatePicker
+					selected={this.state.startDate}
+					onChange={this.handleChange}
 				/>
 			</div>
 		);
