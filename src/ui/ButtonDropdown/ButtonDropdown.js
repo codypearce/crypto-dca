@@ -13,25 +13,52 @@ export default class ButtonDropdown extends Component {
 		});
 	}
 
+	_toggleMenu(state) {
+		this.setState({
+			isOpen: state ? state : !this.state.isOpen
+		});
+	}
+
 	render() {
-		const { selected } = this.state;
+		const { isOpen, selected } = this.state;
 		return (
-			<div>
-				<button>{selected ? selected : "Frequency"}</button>
-				<div>
-					<div onClick={() => this._updateValue("Everyday")}>
+			<div className="dropdown">
+				<button onClick={() => this._toggleMenu()}>
+					{selected ? selected : "Frequency"}
+				</button>
+				<div
+					className={`dropdown_menu ${
+						isOpen ? "dropdown_menu--open" : ""
+					}`}
+				>
+					<div
+						className="dropdown_menu_item"
+						onClick={() => this._updateValue("Everyday")}
+					>
 						Everyday
 					</div>
-					<div onClick={() => this._updateValue("Every Other Day")}>
+					<div
+						className="dropdown_menu_item"
+						onClick={() => this._updateValue("Every Other Day")}
+					>
 						Every Other day
 					</div>
-					<div onClick={() => this._updateValue("Every Week")}>
+					<div
+						className="dropdown_menu_item"
+						onClick={() => this._updateValue("Every Week")}
+					>
 						Every Week
 					</div>
-					<div onClick={() => this._updateValue("Every Two Weeks")}>
+					<div
+						className="dropdown_menu_item"
+						onClick={() => this._updateValue("Every Two Weeks")}
+					>
 						Every Two Weeks
 					</div>
-					<div onClick={() => this._updateValue("Every Month")}>
+					<div
+						className="dropdown_menu_item"
+						onClick={() => this._updateValue("Every Month")}
+					>
 						Every Month
 					</div>
 				</div>

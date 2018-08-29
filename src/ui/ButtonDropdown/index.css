@@ -1,0 +1,24 @@
+.dropdown {
+	position: relative;
+}
+
+.dropdown_menu {
+	display: none;
+	position: absolute;
+	top: 20px;
+	left: 30px;
+	background-color: white;
+	z-index: 10;
+}
+
+.dropdown_menu--open {
+	display: block;
+}
+
+.dropdown_menu_item {
+	padding: 6px 0;
+}
+
+.dropdown_menu_item:hover {
+	cursor: pointer;
+}
