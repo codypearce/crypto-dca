@@ -11,6 +11,7 @@ export default class ButtonDropdown extends Component {
 		this.setState({
 			selected: value
 		});
+		this._toggleMenu(false);
 	}
 
 	_toggleMenu(state) {
