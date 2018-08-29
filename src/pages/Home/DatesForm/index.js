@@ -5,6 +5,8 @@ import moment from "moment";
 
 import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 
+import ButtonDropdown from "../../../ui/ButtonDropdown/ButtonDropdown";
+
 class DatesForm extends Component {
 	state = {
 		frequency: null,
@@ -23,7 +25,7 @@ class DatesForm extends Component {
 		return (
 			<div>
 				<h1>Bitcoin DCA</h1>
-
+				<ButtonDropdown />
 				<input
 					placeholder="How much?"
 					type="number"

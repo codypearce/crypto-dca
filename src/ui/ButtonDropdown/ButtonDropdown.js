@@ -9,21 +9,31 @@ export default class ButtonDropdown extends Component {
 
 	_updateValue(value) {
 		this.setState({
-			selected: value.target.value
+			selected: value
 		});
 	}
 
 	render() {
-		const {value} = this.state;
+		const { selected } = this.state;
 		return (
 			<div>
-				<button>{value ? value : {'Frequency'}</button>
+				<button>{selected ? selected : "Frequency"}</button>
 				<div>
-					<div onClick={() => this._updateValue('Everyday') }>Everyday</div>
-					<div onClick={() => this._updateValue('Everyday') }>Every Other day</div>
-					<div onClick={() => this._updateValue('Everyday') }>Every Week</div>
-					<div onClick={() => this._updateValue('Everyday') }>Every Two Weeks</div>
-					<div onClick={() => this._updateValue('Everyday') }>Every Month</div>
+					<div onClick={() => this._updateValue("Everyday")}>
+						Everyday
+					</div>
+					<div onClick={() => this._updateValue("Every Other Day")}>
+						Every Other day
+					</div>
+					<div onClick={() => this._updateValue("Every Week")}>
+						Every Week
+					</div>
+					<div onClick={() => this._updateValue("Every Two Weeks")}>
+						Every Two Weeks
+					</div>
+					<div onClick={() => this._updateValue("Every Month")}>
+						Every Month
+					</div>
 				</div>
 			</div>
 		);
