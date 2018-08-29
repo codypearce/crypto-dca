@@ -23,11 +23,7 @@ class DatesForm extends Component {
 		return (
 			<div>
 				<h1>Bitcoin DCA</h1>
-				<input
-					placeholder="How frequent?"
-					type="number"
-					onChange={e => this._updateValue("frequency", e)}
-				/>
+
 				<input
 					placeholder="How much?"
 					type="number"
