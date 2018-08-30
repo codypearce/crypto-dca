@@ -8,36 +8,56 @@ import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 import ButtonDropdown from "../../../ui/ButtonDropdown/ButtonDropdown";
 
 class DatesForm extends Component {
-	state = {
-		frequency: null,
-		amount: null,
-		startDate: null,
-		endDate: null
-	};
+  state = {
+    frequency: null,
+    amount: null,
+    startDate: null,
+    endDate: null
+  };
 
-	_updateValue(type, value) {
-		this.setState({
-			[type]: value.target.value
-		});
-	}
+  _updateValue(type, value) {
+    this.setState({
+      [type]: value.target.value
+    });
+  }
 
-	render() {
-		return (
-			<div>
-				<h1>Bitcoin DCA</h1>
-				<ButtonDropdown />
-				<input
-					placeholder="How much?"
-					type="number"
-					onChange={e => this._updateValue("amount", e)}
-				/>
-				<DatePicker
-					selected={this.state.startDate}
-					onChange={this.handleChange}
-				/>
-			</div>
-		);
-	}
+  _updateFrequency(value) {
+    this.setState({
+      frequency: value
+    });
+  }
+
+  render() {
+    const { frequency } = this.state;
+
+    const frequencyTypes = [
+      "Everyday",
+      "Every Other Day",
+      "Every Week",
+      "Every Two Weeks",
+      "Every Month"
+    ];
+
+    return (
+      <div>
+        <h1>Bitcoin DCA</h1>
+        <ButtonDropdown
+          value={frequency}
+          onChange={this._updateFrequency}
+          menuItems={frequencyTypes}
+        />
+        <input
+          placeholder="How much?"
+          type="number"
+          onChange={e => this._updateValue("amount", e)}
+        />
+        <DatePicker
+          selected={this.state.startDate}
+          onChange={this.handleChange}
+        />
+      </div>
+    );
+  }
 }
 
 export default DatesForm;
