@@ -43,7 +43,7 @@ class DatesForm extends Component {
         <h1>Bitcoin DCA</h1>
         <ButtonDropdown
           value={frequency}
-          onChange={this._updateFrequency}
+          onChange={value => this._updateFrequency(value)}
           menuItems={frequencyTypes}
         />
         <input

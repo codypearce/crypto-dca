@@ -1,13 +1,19 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import ButtonDropdownMenuItem from "./ButtonDropdownMenuItem";
 
 import "./index.css";
 
 export default class ButtonDropdown extends Component {
+  static propTypes = {
+    menuItems: PropTypes.array,
+    value: PropTypes.string,
+    onChange: PropTypes.func
+  };
+
   state = {
-    isOpen: false,
-    selected: null
+    isOpen: false
   };
 
   _toggleMenu(state) {
@@ -16,16 +22,22 @@ export default class ButtonDropdown extends Component {
     });
   }
 
+  _updateValue(value) {
+    this.props.onChange(value);
+    this._toggleMenu(false);
+  }
+
   render() {
-    const { isOpen, selected } = this.state;
+    const { isOpen } = this.state;
+    const { value } = this.props;
     return (
       <div className="dropdown">
         <button onClick={() => this._toggleMenu()}>
-          {selected ? selected : "Frequency"}
+          {value ? value : "Frequency"}
         </button>
         <div className={`dropdown_menu ${isOpen ? "dropdown_menu--open" : ""}`}>
           <ButtonDropdownMenuItem
-            onClick={this._updateValue}
+            onClick={() => this._updateValue("Everyday")}
             menuValue={"Everyday"}
           />
         </div>
