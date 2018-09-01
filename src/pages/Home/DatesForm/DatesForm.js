@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import "./index.css";
+import "./DatesForm.css";
 import DatePicker from "react-datepicker";
-import moment from "moment";
 
 import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 

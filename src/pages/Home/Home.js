@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./index.css";
+import "./Home.css";
 
 import Header from "./Header/Header";
-import DatesForm from "./DatesForm";
+import DatesForm from "./DatesForm/DatesForm";
 
 class Home extends Component {
   render() {
