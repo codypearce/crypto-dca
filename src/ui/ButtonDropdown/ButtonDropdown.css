@@ -2,13 +2,23 @@
 	position: relative;
 }
 
+.dropdown_button {
+	background-color: #2ecc71;
+	border: none;
+	font-size: 18px;
+	color: white;
+	width: 100px;
+	height: 40px;
+}
+
 .dropdown_menu {
 	display: none;
 	position: absolute;
-	top: 20px;
-	left: 30px;
-	background-color: white;
+	top: 40px;
+	left: 43px;
+	background-color: #ecf0f1;
 	z-index: 10;
+	width: 100px;
 }
 
 .dropdown_menu--open {

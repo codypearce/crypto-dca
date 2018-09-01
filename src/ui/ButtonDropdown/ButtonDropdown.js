@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import ButtonDropdownMenuItem from "./ButtonDropdownMenuItem";
 
-import "./index.css";
+import "./ButtonDropdown.css";
 
 export default class ButtonDropdown extends Component {
   static propTypes = {
@@ -32,7 +32,10 @@ export default class ButtonDropdown extends Component {
     const { value } = this.props;
     return (
       <div className="dropdown">
-        <button onClick={() => this._toggleMenu()}>
+        <button
+          onClick={() => this._toggleMenu()}
+          className="dropdown_button pointer"
+        >
           {value ? value : "Frequency"}
         </button>
         <div className={`dropdown_menu ${isOpen ? "dropdown_menu--open" : ""}`}>

@@ -27,7 +27,7 @@ class DatesForm extends Component {
   }
 
   render() {
-    const { frequency } = this.state;
+    const { frequency, startDate, endDate } = this.state;
 
     const frequencyTypes = [
       "Everyday",
@@ -50,10 +50,8 @@ class DatesForm extends Component {
           type="number"
           onChange={e => this._updateValue("amount", e)}
         />
-        <DatePicker
-          selected={this.state.startDate}
-          onChange={this.handleChange}
-        />
+        <DatePicker selected={startDate} onChange={this.handleChange} />
+        <DatePicker selected={endDate} onChange={this.handleChange} />
       </div>
     );
   }
