@@ -69,6 +69,12 @@ class DatesForm extends Component {
         <DatePicker
           selected={endDate}
           onChange={value => this.handleChange(value, "endDate")}
+          showMonthDropdown
+          showYearDropdown
+          minDate={moment("2009-01-12").add(1, "day")}
+          maxDate={moment()}
+          placeholderText="End Date"
+          todayButton={"Today"}
         />
       </div>
     );
