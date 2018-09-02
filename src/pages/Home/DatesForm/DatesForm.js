@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./DatesForm.css";
 import DatePicker from "react-datepicker";
+import moment from "moment";
 
 import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 
@@ -23,6 +24,11 @@ class DatesForm extends Component {
   _updateFrequency(value) {
     this.setState({
       frequency: value
+    });
+  }
+  handleChange(value, type) {
+    this.setState({
+      [type]: value
     });
   }
 
@@ -50,8 +56,20 @@ class DatesForm extends Component {
           type="number"
           onChange={e => this._updateValue("amount", e)}
         />
-        <DatePicker selected={startDate} onChange={this.handleChange} />
-        <DatePicker selected={endDate} onChange={this.handleChange} />
+        <DatePicker
+          selected={startDate}
+          onChange={value => this.handleChange(value, "startDate")}
+          showMonthDropdown
+          showYearDropdown
+          openToDate={moment("2009-01-12")}
+          minDate={moment("2009-01-12")}
+          maxDate={moment().subtract(1, "day")}
+          placeholderText="Start Date"
+        />
+        <DatePicker
+          selected={endDate}
+          onChange={value => this.handleChange(value, "endDate")}
+        />
       </div>
     );
   }
