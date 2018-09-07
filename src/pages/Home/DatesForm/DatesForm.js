@@ -45,7 +45,6 @@ class DatesForm extends Component {
 
     return (
       <div>
-        <h1>Bitcoin DCA</h1>
         <ButtonDropdown
           value={frequency}
           onChange={value => this._updateFrequency(value)}

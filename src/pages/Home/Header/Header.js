@@ -12,6 +12,8 @@ const Header = () => {
           About
         </a>
       </div>
+
+      <h1 className="header_title">CRYPTO DCA</h1>
     </header>
   );
 };
