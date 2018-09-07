@@ -1,19 +1,42 @@
 .header {
-  background: #2980b9;
-  padding: 0 10px;
   color: white;
-  height: 60px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  font-family: Teko;
 }
 
 .header_link {
   padding: 0 16px;
+  background-color: #f7931a;
   color: white;
-
   height: 60px;
   display: flex;
   align-items: center;
+  transform: skewX(-20deg);
+  font-size: 24px;
+  letter-spacing: 1.75;
+  transition: all ease 0.3s;
+  border-right: 6px solid #333;
+}
+.header_link:first-child::before {
+  content: "";
+  width: 20px;
+  height: 50px;
+  background-color: #f7931a;
+  position: absolute;
+  left: -11px;
+  transition: all ease 0.3s;
+}
+.header_link:last-child {
+  border: none;
 }
 .header_link:hover {
-  background: white;
-  color: black;
+  background: #333;
+  color: #f7931a;
+}
+.header_link:hover::before {
+  background: #333;
+  color: #f7931a;
 }
