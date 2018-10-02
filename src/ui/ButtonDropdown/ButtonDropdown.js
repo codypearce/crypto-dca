@@ -32,6 +32,7 @@ export default class ButtonDropdown extends Component {
     const { value } = this.props;
     return (
       <div className="dropdown">
+        <label className="dropdown__label">How Frequent</label>
         <button
           onClick={() => this._toggleMenu()}
           className="dropdown_button pointer"

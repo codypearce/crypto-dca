@@ -3,12 +3,22 @@
 }
 
 .dropdown_button {
-	background-color: #2ecc71;
 	border: none;
 	font-size: 18px;
 	color: white;
-	width: 100px;
+	width: 150px;
 	height: 40px;
+	background-color: transparent;
+	border-bottom: 2px solid #F7931A;
+	text-align: left;
+}
+.dropdown__label {
+		color: #F7931A;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	  font-family: Teko;
+		display: block;
+		font-size: 18px;
 }
 
 .dropdown_menu {
