@@ -6,6 +6,7 @@ import moment from "moment";
 import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 
 import ButtonDropdown from "../../../ui/ButtonDropdown/ButtonDropdown";
+import TextInput from "../../../ui/TextInput/TextInput";
 
 class DatesForm extends Component {
   state = {
@@ -45,16 +46,14 @@ class DatesForm extends Component {
 
     return (
       <div>
-        <ButtonDropdown
-          value={frequency}
-          onChange={value => this._updateFrequency(value)}
-          menuItems={frequencyTypes}
-        />
-        <input
-          placeholder="How much?"
-          type="number"
-          onChange={e => this._updateValue("amount", e)}
-        />
+        <div className="row">
+          <TextInput />
+          <ButtonDropdown
+            value={frequency}
+            onChange={value => this._updateFrequency(value)}
+            menuItems={frequencyTypes}
+          />
+        </div>
         <DatePicker
           selected={startDate}
           onChange={value => this.handleChange(value, "startDate")}
