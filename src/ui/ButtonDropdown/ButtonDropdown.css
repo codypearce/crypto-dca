@@ -11,6 +11,7 @@
 	background-color: transparent;
 	border-bottom: 2px solid #F7931A;
 	text-align: left;
+	margin-top: 4px;
 }
 .dropdown__label {
 		color: #F7931A;

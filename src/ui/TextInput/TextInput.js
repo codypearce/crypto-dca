@@ -8,6 +8,9 @@ export default class TextInput extends Component {
     value: PropTypes.string,
     onChange: PropTypes.func
   };
+  state = {
+    isOpen: false
+  };
 
   render() {
     const { isOpen } = this.state;

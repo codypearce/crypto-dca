@@ -45,8 +45,8 @@ class DatesForm extends Component {
     ];
 
     return (
-      <div>
-        <div className="row">
+      <div className="DatesForm">
+        <div className="row between-xs DatesForm__row">
           <TextInput />
           <ButtonDropdown
             value={frequency}
