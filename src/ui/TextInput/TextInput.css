@@ -1,22 +1,21 @@
-
 .TextInput__input {
-	border: none;
-	font-size: 18px;
-	color: white;
-	width: 150px;
-	height: 40px;
-	background-color: transparent;
-	border-bottom: 2px solid #F7931A;
-	text-align: left;
+  border: none;
+  font-size: 18px;
+  color: white;
+  width: 150px;
+  height: 40px;
+  background-color: transparent;
+  border-bottom: 2px solid #f7931a;
+  text-align: left;
 }
 .TextInput__input:focus {
   outline: none;
 }
 .TextInput__label {
-		color: #F7931A;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-	  font-family: Teko;
-		display: block;
-		font-size: 18px;
+  color: #f7931a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: Teko;
+  display: block;
+  font-size: 18px;
 }
