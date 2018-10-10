@@ -29,8 +29,7 @@ export default class ButtonDropdown extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { value } = this.props;
-
+    const { value, menuItems } = this.props;
     return (
       <div className="dropdown">
         <label className="dropdown__label">How Frequent</label>
@@ -41,14 +40,15 @@ export default class ButtonDropdown extends Component {
           {value ? value : "Frequency"}
         </button>
         <div className={`dropdown_menu ${isOpen ? "dropdown_menu--open" : ""}`}>
-          <ButtonDropdownMenuItem
-            onClick={() => this._updateValue("Everyday")}
-            menuValue={"Everyday"}
-          />
-          <ButtonDropdownMenuItem
-            onClick={() => this._updateValue("Every Other Day ")}
-            menuValue={"Every Other Day"}
-          />
+          {menuItems.map((item, index) => {
+            return (
+              <ButtonDropdownMenuItem
+                key={index}
+                onClick={() => this._updateValue(item)}
+                menuValue={item}
+              />
+            );
+          })}
         </div>
       </div>
     );

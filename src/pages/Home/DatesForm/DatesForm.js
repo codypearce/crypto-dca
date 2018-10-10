@@ -41,7 +41,8 @@ class DatesForm extends Component {
       "Every Other Day",
       "Every Week",
       "Every Two Weeks",
-      "Every Month"
+      "Every Month",
+      "Every Other Month"
     ];
 
     return (
