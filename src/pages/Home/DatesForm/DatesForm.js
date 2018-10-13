@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import "./DatesForm.css";
-import DatePicker from "react-datepicker";
-import moment from "moment";
 
-import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 import ButtonDropdown from "../../../ui/ButtonDropdown/ButtonDropdown";
 import TextInput from "../../../ui/TextInput/TextInput";
+import DatePicker from "../../../ui/DatePicker/DatePicker";
 
 class DatesForm extends Component {
   state = {
@@ -55,26 +54,28 @@ class DatesForm extends Component {
             menuItems={frequencyTypes}
           />
         </div>
-        <DatePicker
-          selected={startDate}
-          onChange={value => this.handleChange(value, "startDate")}
-          showMonthDropdown
-          showYearDropdown
-          openToDate={moment("2009-01-12")}
-          minDate={moment("2009-01-12")}
-          maxDate={moment().subtract(1, "day")}
-          placeholderText="Start Date"
-        />
-        <DatePicker
-          selected={endDate}
-          onChange={value => this.handleChange(value, "endDate")}
-          showMonthDropdown
-          showYearDropdown
-          minDate={moment("2009-01-12").add(1, "day")}
-          maxDate={moment()}
-          placeholderText="End Date"
-          todayButton={"Today"}
-        />
+        <div className="row between-xs DatesForm__row">
+          <DatePicker
+            selected={startDate}
+            onChange={value => this.handleChange(value, "startDate")}
+            openToDate={moment("2009-01-12")}
+            minDate={moment("2009-01-12")}
+            maxDate={moment().subtract(1, "day")}
+            placeholderText="Start Date"
+            className="TextInput__input"
+            label="Start Date"
+          />
+          <DatePicker
+            selected={endDate}
+            onChange={value => this.handleChange(value, "endDate")}
+            minDate={moment("2009-01-12").add(1, "day")}
+            maxDate={moment()}
+            placeholderText="End Date"
+            todayButton={"Today"}
+            className="TextInput__input"
+            label="End Date"
+          />
+        </div>
       </div>
     );
   }
