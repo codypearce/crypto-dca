@@ -35,7 +35,9 @@ export default class ButtonDropdown extends Component {
         <label className="dropdown__label">How Frequent</label>
         <button
           onClick={() => this._toggleMenu()}
-          className="dropdown_button pointer"
+          className={`dropdown_button pointer ${
+            !value ? "dropdown_button--noValue" : ""
+          }`}
         >
           {value ? value : "Frequency"}
         </button>
