@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { default as ReactDatePicker } from "react-datepicker";
 
-import "./DatePicker.css";
 import "../../../node_modules/react-datepicker/dist/react-datepicker.css";
+import "./DatePicker.css";
 
 export default class DatePicker extends Component {
   static propTypes = {
@@ -49,6 +49,7 @@ export default class DatePicker extends Component {
           todayButton={todayButton}
           placeholderText={placeholderText}
           className="TextInput__input"
+          calendarClassName="Calender"
         />
       </div>
     );
