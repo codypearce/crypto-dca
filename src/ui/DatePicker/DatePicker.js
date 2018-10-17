@@ -50,6 +50,7 @@ export default class DatePicker extends Component {
           placeholderText={placeholderText}
           className="TextInput__input"
           calendarClassName="Calender"
+          fixedHeight
         />
       </div>
     );
