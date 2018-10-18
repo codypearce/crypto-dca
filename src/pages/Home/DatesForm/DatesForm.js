@@ -15,11 +15,11 @@ class DatesForm extends Component {
     endDate: null
   };
 
-  _updateValue(type, value) {
+  _updateAmount = value => {
     this.setState({
-      [type]: value.target.value
+      amount: value.target.value
     });
-  }
+  };
 
   _updateFrequency(value) {
     this.setState({
@@ -33,7 +33,7 @@ class DatesForm extends Component {
   }
 
   render() {
-    const { frequency, startDate, endDate } = this.state;
+    const { frequency, amount, startDate, endDate } = this.state;
 
     const frequencyTypes = [
       "Everyday",
@@ -47,7 +47,7 @@ class DatesForm extends Component {
     return (
       <div className="DatesForm">
         <div className="row between-xs DatesForm__row">
-          <TextInput />
+          <TextInput onChange={this._updateValue} value={amount} />
           <ButtonDropdown
             value={frequency}
             onChange={value => this._updateFrequency(value)}

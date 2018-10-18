@@ -14,15 +14,16 @@ export default class TextInput extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { value } = this.props;
+    const { value, onChange } = this.props;
     return (
       <div className="TextInput">
-        <label className="TextInput__label">How Much</label>
+        <label className="TextInput__label">How Much ($)</label>
         <input
-          placeholder="How much?"
+          placeholder="Amount in USD"
           type="number"
-          onChange={e => this._updateValue("amount", e)}
+          onChange={onChange}
           className="TextInput__input"
+          value={value}
         />
       </div>
     );
