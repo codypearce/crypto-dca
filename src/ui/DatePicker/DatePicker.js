@@ -7,10 +7,8 @@ import "./DatePicker.css";
 
 export default class DatePicker extends Component {
   static propTypes = {
-    value: PropTypes.string,
     onChange: PropTypes.func,
     selected: PropTypes.string,
-    onChange: PropTypes.func,
     openToDate: PropTypes.func,
     minDate: PropTypes.func,
     maxDate: PropTypes.func,
@@ -18,14 +16,9 @@ export default class DatePicker extends Component {
     label: PropTypes.string,
     todayButton: PropTypes.string
   };
-  state = {
-    isOpen: false
-  };
 
   render() {
-    const { isOpen } = this.state;
     const {
-      value,
       selected,
       onChange,
       openToDate,
