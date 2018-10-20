@@ -1,0 +1,22 @@
+.Button {
+  font-size: 28px;
+  border: none;
+  box-sizing: border-box;
+  background-color: #f7931a;
+  text-transform: uppercase;
+  font-family: "Teko";
+  color: white;
+  line-height: 40px;
+  height: 40px;
+  width: 200px;
+  letter-spacing: 1px;
+}
+
+.Button:hover {
+  cursor: pointer;
+  color: #444;
+}
+
+.Button:focus {
+  outline: none;
+}

@@ -74,7 +74,7 @@
 .react-datepicker__year-read-view--down-arrow::before,
 .react-datepicker__month-read-view--down-arrow::before,
 .react-datepicker__month-year-read-view--down-arrow::before {
-  border-top-color: #444444;
+  border-top-color: white;
 }
 
 .react-datepicker__year-read-view:hover
@@ -89,7 +89,15 @@
   .react-datepicker__year-read-view--down-arrow,
 .react-datepicker__month-year-read-view:hover
   .react-datepicker__month-read-view--down-arrow:hover {
-  border-top-color: white;
+  border-top-color: #f7931a;
+}
+
+.react-datepicker .react-datepicker__triangle {
+  border-top-color: #f7931a !important;
+}
+
+.react-datepicker .react-datepicker__triangle::before {
+  border-top-color: #f7931a !important;
 }
 
 .react-datepicker__navigation--previous {
