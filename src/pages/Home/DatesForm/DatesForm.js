@@ -34,14 +34,23 @@ class DatesForm extends Component {
     });
   }
 
-  handleSubmit = () => {
-    const { frequency, amount, startDate, endDate } = this.state;
+  async getCoinData() {
+    const { startDate, endDate } = this.state;
+
     const dateString = `?start=${startDate.format(
       "YYYY-MM-DD"
     )}&end=${endDate.format("YYYY-MM-DD")}`;
     const url = `${APIURL}${dateString}`;
-    console.log(url);
-  };
+
+    const coinRepsonse = await fetch(url);
+    const coinJson = await coinRepsonse.json();
+    return coinJson;
+  }
+
+  async handleSubmit() {
+    const { frequency, amount } = this.state;
+    const coinData = await this.getCoinData();
+  }
 
   render() {
     const { frequency, amount, startDate, endDate } = this.state;
@@ -90,7 +99,7 @@ class DatesForm extends Component {
           />
         </div>
         <div className="row center-xs">
-          <Button text={"Submit"} onClick={this.handleSubmit} />
+          <Button text={"Submit"} onClick={() => this.handleSubmit()} />
         </div>
       </div>
     );
