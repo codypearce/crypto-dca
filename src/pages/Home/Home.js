@@ -3,7 +3,6 @@ import "./Home.css";
 
 import Header from "./Header/Header";
 import DatesForm from "./DatesForm/DatesForm";
-import Button from "../../ui/Button/Button";
 
 class Home extends Component {
   render() {
@@ -18,7 +17,6 @@ class Home extends Component {
             would have made using DCA.
           </p>
           <DatesForm />
-          <Button text={"Submit"} />
         </div>
       </div>
     );
