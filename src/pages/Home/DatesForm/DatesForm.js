@@ -47,9 +47,23 @@ class DatesForm extends Component {
     return coinJson;
   }
 
+  getFrequencyNumeric() {
+    const { frequency } = this.state;
+    const frequencyTable = {
+      Everyday: 1,
+      "Every Other Day": 2,
+      "Every Week": 7,
+      "Every Two Weeks": 14,
+      "Every Month": 30,
+      "Every Two Months": 60
+    };
+    return frequencyTable[frequency];
+  }
+
   async handleSubmit() {
-    const { frequency, amount } = this.state;
+    const { amount } = this.state;
     const coinData = await this.getCoinData();
+    const frequencyNumeric = this.getFrequencyNumeric();
   }
 
   render() {
@@ -80,7 +94,7 @@ class DatesForm extends Component {
           <DatePicker
             selected={startDate}
             onChange={value => this.handleChange(value, "startDate")}
-            openToDate={moment(coindeskStart)}
+            openToDate={moment().subtract(1, "year")}
             minDate={moment(coindeskStart)}
             maxDate={moment().subtract(1, "day")}
             placeholderText="Start Date"
