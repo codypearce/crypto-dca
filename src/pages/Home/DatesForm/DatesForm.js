@@ -64,6 +64,18 @@ class DatesForm extends Component {
     const { amount } = this.state;
     const coinData = await this.getCoinData();
     const frequencyNumeric = this.getFrequencyNumeric();
+    let dollarAmountInvested = 0;
+    let coinAmount = 0;
+    let coinDataArray = [];
+    for (const key of Object.keys(coinData.bpi)) {
+      coinDataArray.push(coinData.bpi[key]);
+    }
+
+    for (let i = 0; i < coinDataArray.length; i += frequencyNumeric) {
+      dollarAmountInvested += Number(amount);
+      coinAmount += amount / coinDataArray[i];
+    }
+    console.log(dollarAmountInvested, coinAmount);
   }
 
   render() {
