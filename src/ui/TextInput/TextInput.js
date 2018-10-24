@@ -19,7 +19,7 @@ export default class TextInput extends Component {
           type="number"
           onChange={onChange}
           className="TextInput__input"
-          value={value}
+          value={value || ""}
         />
       </div>
     );

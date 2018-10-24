@@ -9,9 +9,9 @@ export default class DatePicker extends Component {
   static propTypes = {
     onChange: PropTypes.func,
     selected: PropTypes.string,
-    openToDate: PropTypes.func,
-    minDate: PropTypes.func,
-    maxDate: PropTypes.func,
+    openToDate: PropTypes.object,
+    minDate: PropTypes.object,
+    maxDate: PropTypes.object,
     placeholderText: PropTypes.string,
     label: PropTypes.string,
     todayButton: PropTypes.string

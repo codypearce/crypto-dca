@@ -10,8 +10,8 @@ class Home extends Component {
       <div className="home">
         <Header />
         <div className="home_body col-xs-12 middle-xs">
-          <h1 class="title">BITCOIN DCA</h1>
-          <p class="home_text">
+          <h1 className="title">BITCOIN DCA</h1>
+          <p className="home_text">
             Dollar Cost Averaging is investing the same amount at the same time
             over a period of time. Enter in the values below to see how much you
             would have made using DCA.

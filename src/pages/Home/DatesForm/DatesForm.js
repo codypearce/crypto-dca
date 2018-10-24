@@ -86,7 +86,6 @@ class DatesForm extends Component {
         date: coinDataArray[i].date
       });
     }
-    console.log(dollarAmountInvested, coinAmount, dataArr);
   }
 
   render() {
@@ -102,7 +101,7 @@ class DatesForm extends Component {
     ];
     const btcStart = "2009-01-12";
     const coindeskStart = "2010-07-17";
-
+    console.log(this.props);
     return (
       <div className="DatesForm">
         <div className="row between-xs DatesForm__row">
