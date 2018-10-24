@@ -9,10 +9,8 @@ class Show extends Component {
 			<div className="home">
 				<Header />
 				<div className="home_body col-xs-12 middle-xs">
-					<h1 class="title">Show Page</h1>
-					<p class="home_text">
-					
-					</p>
+					<h1 className="title">Show Page</h1>
+					<p className="home_text" />
 				</div>
 			</div>
 		);

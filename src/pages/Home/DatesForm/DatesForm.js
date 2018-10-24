@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import "./DatesForm.css";
 
 import moment from "moment";
@@ -10,6 +12,10 @@ import Button from "../../../ui/Button/Button";
 import APIURL from "../../../constants/API";
 
 class DatesForm extends Component {
+  static propTypes = {
+    history: PropTypes.object
+  };
+
   state = {
     frequency: null,
     amount: null,
@@ -59,33 +65,20 @@ class DatesForm extends Component {
     };
     return frequencyTable[frequency];
   }
-
+  buildQuery() {
+    const { amount, startDate, endDate } = this.state;
+    const frequencyNumeric = this.getFrequencyNumeric();
+    const dateString = `?start=${startDate.format(
+      "YYYY-MM-DD"
+    )}&end=${endDate.format("YYYY-MM-DD")}`;
+    return `${dateString}&amount=${amount}&freq=${frequencyNumeric}`;
+  }
   async handleSubmit() {
     const { amount } = this.state;
-    const coinData = await this.getCoinData();
-    const frequencyNumeric = this.getFrequencyNumeric();
-    let dollarAmountInvested = 0;
-    let coinAmount = 0;
-    let coinDataArray = [];
-    for (const key of Object.keys(coinData.bpi)) {
-      coinDataArray.push({
-        date: key,
-        value: coinData.bpi[key]
-      });
-    }
-
-    let dataArr = [];
-    for (let i = 0; i < coinDataArray.length; i += frequencyNumeric) {
-      dollarAmountInvested += Number(amount);
-      coinAmount += amount / coinDataArray[i].value;
-      dataArr.push({
-        dollarAmountInvested,
-        coinAmount,
-        coinValue: coinDataArray[i].value,
-        investedValue: coinAmount * coinDataArray[i].value,
-        date: coinDataArray[i].date
-      });
-    }
+    // const coinData = await this.getCoinData();
+    // const frequencyNumeric = this.getFrequencyNumeric();
+    const query = this.buildQuery();
+    this.props.history.push(`/show/${query}`);
   }
 
   render() {
@@ -101,7 +94,7 @@ class DatesForm extends Component {
     ];
     const btcStart = "2009-01-12";
     const coindeskStart = "2010-07-17";
-    console.log(this.props);
+
     return (
       <div className="DatesForm">
         <div className="row between-xs DatesForm__row">

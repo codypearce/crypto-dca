@@ -6,6 +6,7 @@ import DatesForm from "./DatesForm/DatesForm";
 
 class Home extends Component {
   render() {
+    console.log(this.props);
     return (
       <div className="home">
         <Header />
@@ -16,7 +17,7 @@ class Home extends Component {
             over a period of time. Enter in the values below to see how much you
             would have made using DCA.
           </p>
-          <DatesForm />
+          <DatesForm history={this.props.history} />
         </div>
       </div>
     );
