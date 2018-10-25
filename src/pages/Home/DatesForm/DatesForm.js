@@ -9,7 +9,6 @@ import ButtonDropdown from "../../../ui/ButtonDropdown/ButtonDropdown";
 import TextInput from "../../../ui/TextInput/TextInput";
 import DatePicker from "../../../ui/DatePicker/DatePicker";
 import Button from "../../../ui/Button/Button";
-import APIURL from "../../../constants/API";
 
 class DatesForm extends Component {
   static propTypes = {
@@ -40,19 +39,6 @@ class DatesForm extends Component {
     });
   }
 
-  async getCoinData() {
-    const { startDate, endDate } = this.state;
-
-    const dateString = `?start=${startDate.format(
-      "YYYY-MM-DD"
-    )}&end=${endDate.format("YYYY-MM-DD")}`;
-    const url = `${APIURL}${dateString}`;
-
-    const coinRepsonse = await fetch(url);
-    const coinJson = await coinRepsonse.json();
-    return coinJson;
-  }
-
   getFrequencyNumeric() {
     const { frequency } = this.state;
     const frequencyTable = {
@@ -74,11 +60,11 @@ class DatesForm extends Component {
     return `${dateString}&amount=${amount}&freq=${frequencyNumeric}`;
   }
   async handleSubmit() {
-    const { amount } = this.state;
-    // const coinData = await this.getCoinData();
-    // const frequencyNumeric = this.getFrequencyNumeric();
     const query = this.buildQuery();
-    this.props.history.push(`/show/${query}`);
+    this.props.history.push({
+      pathname: "/show",
+      search: query
+    });
   }
 
   render() {
