@@ -36,8 +36,6 @@ class Show extends Component {
 	}
 	initializeData() {
 		const { amount, freq, coinData } = this.state;
-		// console.log(this.state);
-		// console.log(coinData.length, freq);
 		let dollarAmountInvested = 0;
 		let coinAmount = 0;
 
@@ -53,15 +51,36 @@ class Show extends Component {
 				date: coinData[i].date
 			});
 		}
-		console.log(dollarAmountInvested, coinAmount, dataArr);
+		this.setState({
+			dollarAmountInvested,
+			coinAmount,
+			dataArr,
+			investedValue: coinAmount * coinData[coinData.length - 1].value
+		});
 	}
 	render() {
+		const {
+			dollarAmountInvested,
+			coinAmount,
+			dataArr,
+			investedValue
+		} = this.state;
 		return (
 			<div className="home">
 				<Header />
 				<div className="home_body col-xs-12 middle-xs">
-					<h1 className="title">Show Page</h1>
-					<p className="home_text" />
+					<div className="row">
+						<p>Value</p>
+						<h2>{investedValue}</h2>
+					</div>
+					<div className="row">
+						<p>Coin</p>
+						<h2>{coinAmount}</h2>
+					</div>
+					<div className="row">
+						<p>Dollar</p>
+						<h2>{dollarAmountInvested}</h2>
+					</div>
 				</div>
 			</div>
 		);
