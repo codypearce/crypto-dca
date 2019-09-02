@@ -91,26 +91,28 @@ class Show extends Component {
           onClick={() => this.handleSubmit()}
         />
 
-        <div className="Show__body col-xs-8  ">
+        <div className="Show__body col-xs-10  ">
           <div className="row Show__body__row middle-xs">
-            <p className="RowHeading col-xs-3">Invested</p>
+            <p className="RowHeading col-xs-4 ">Total</p>
             <h2 className="RowValue">
-              ${this.roundToTwo(dollarAmountInvested)}
+              ${this.roundToTwo(investedValue)}{" "}
+              <span style={{ color: "white" }}>/</span>{" "}
+              {this.roundToFive(coinAmount)}
             </h2>
           </div>
           <div className="row Show__body__row middle-xs">
-            <p className="RowHeading col-xs-3 ">Total</p>
-            <h2 className="RowValue">${this.roundToTwo(investedValue)}</h2>
-          </div>
-          <div className="row Show__body__row middle-xs ">
-            <p className="RowHeading col-xs-3">Coin</p>
-            <h2 className="RowValue">{this.roundToFive(coinAmount)}</h2>
+            <p className="RowHeading RowHeading--small col-xs-4">Invested</p>
+            <h2 className="RowValue RowValue--small ">
+              ${this.roundToTwo(dollarAmountInvested)}
+            </h2>
           </div>
 
           <div className="row Show__body__row middle-xs">
-            <p className="RowHeading col-xs-3">Gained</p>
-            <h2 className="RowValue">
-              ${this.roundToTwo(dollarAmountInvested)}
+            <p className="RowHeading RowHeading--small col-xs-4">Gained</p>
+            <h2 className="RowValue RowValue--small ">
+              ${this.roundToTwo(dollarAmountInvested)}{" "}
+              <span style={{ color: "white", fontSize: 18 }}>for</span> 11%{" "}
+              <span style={{ color: "white", fontSize: 18 }}>growth</span>
             </h2>
           </div>
         </div>

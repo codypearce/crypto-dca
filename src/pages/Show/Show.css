@@ -8,7 +8,7 @@
 
 .Show__body {
   height: 100vh;
-  padding-top: 100px;
+  padding-top: 140px;
   width: 100%;
 
   display: flex;
@@ -18,17 +18,27 @@
 
 .Show__body__row {
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .RowHeading {
   font-family: "Orbitron";
   font-size: 40px;
-  color: #fff;
+  color: #ebebeb;
   font-weight: 700;
+  margin: 0;
+}
+
+.RowHeading--small {
+  font-size: 20px;
 }
 .RowValue {
   font-family: "Orbitron";
   font-size: 60px;
   color: #f7931a;
   font-weight: bold;
+  margin: 0;
+}
+.RowValue--small {
+  font-size: 30px;
 }
