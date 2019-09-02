@@ -82,21 +82,21 @@ class Show extends Component {
           onClick={() => this.handleSubmit()}
         />
 
-        <div className="Show__body col-xs-10 ">
+        <div className="Show__body col-xs-10  ">
           <div className="row Show__body__row">
             <p className="RowHeading col-xs-3">Total</p>
             <h2 className="RowValue">{investedValue}</h2>
           </div>
-          <div className="row Show__body__row">
-            <p className="RowHeading">Coin</p>
+          <div className="row Show__body__row ">
+            <p className="RowHeading col-xs-3">Coin</p>
             <h2 className="RowValue">{coinAmount}</h2>
           </div>
           <div className="row Show__body__row">
-            <p className="RowHeading">Invested</p>
+            <p className="RowHeading col-xs-3">Invested</p>
             <h2 className="RowValue">{dollarAmountInvested}</h2>
           </div>
           <div className="row Show__body__row">
-            <p className="RowHeading">Gained</p>
+            <p className="RowHeading col-xs-3">Gained</p>
             <h2 className="RowValue">{dollarAmountInvested}</h2>
           </div>
         </div>
