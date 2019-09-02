@@ -17,17 +17,23 @@ import {
 
 class Show extends Component {
   state = {
-    params: null
+    params: null,
+    loading: true
   };
   componentDidMount() {
     const params = queryString.parse(this.props.location.search);
 
     this.setState({
-      ...params
+      ...params,
+      loading: true
     });
     this.getCoinData(params.start, params.end);
     this.getDuration(params.start, params.end);
   }
+
+  componentWillUnmount = () => {
+    clearTimeout(this.timeout);
+  };
 
   getDuration(start, end) {
     let a = moment(start);
@@ -87,6 +93,9 @@ class Show extends Component {
       dataArr,
       investedValue: coinAmount * coinData[coinData.length - 1].value
     });
+    this.timeout = setTimeout(() => {
+      this.setState({ loading: false });
+    }, 500);
   }
 
   roundToTwo(num) {
@@ -97,12 +106,17 @@ class Show extends Component {
     return +(Math.round(num + "e+5") + "e-5");
   }
 
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   handleSubmit() {
     this.props.history.push({
       pathname: "/"
     });
   }
-  render() {
+
+  _renderContent() {
     const {
       dollarAmountInvested,
       coinAmount,
@@ -110,7 +124,67 @@ class Show extends Component {
       investedValue,
       duration
     } = this.state;
-    console.log(dataArr);
+    return (
+      <div className="Show__body   ">
+        <div className="row Show__body__row middle-xs">
+          <p className="RowHeading col-sm-2 ">Total</p>
+          <h2 className="RowValue">
+            ${this.numberWithCommas(this.roundToTwo(investedValue))}{" "}
+            <span style={{ color: "white" }}>/</span>{" "}
+            {this.roundToFive(coinAmount)}
+          </h2>
+        </div>
+        <div className="row Show__body__row middle-xs">
+          <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
+          <h2 className="RowValue RowValue--small ">
+            ${this.numberWithCommas(this.roundToTwo(dollarAmountInvested))}{" "}
+            <span style={{ color: "white", fontSize: 18 }}>in</span> {duration}{" "}
+            <span style={{ color: "white", fontSize: 18 }}>months</span>
+          </h2>
+        </div>
+
+        <div className="row Show__body__row middle-xs">
+          <p className="RowHeading RowHeading--small col-sm-2">Gained</p>
+          <h2 className="RowValue RowValue--small ">
+            $
+            {this.numberWithCommas(
+              this.roundToTwo(investedValue - dollarAmountInvested)
+            )}{" "}
+            <span style={{ color: "white", fontSize: 18 }}>for</span>{" "}
+            {this.getGrowth()}%{" "}
+            <span style={{ color: "white", fontSize: 18 }}>growth</span>
+          </h2>
+        </div>
+        <div className=" ">
+          <AreaChart width={980} height={250} data={dataArr}>
+            <XAxis hide dataKey={"date"} />
+            <Tooltip
+              contentStyle={{ background: "#444444", border: "none" }}
+              labelStyle={{ color: "#ebebeb" }}
+              labelFormatter={(value, name, props) => `Date : ${value}`}
+              formatter={(value, name, props) => `${value}`}
+            />
+            <Area
+              type="linear"
+              dataKey="Total"
+              stroke="none"
+              fillOpacity={1}
+              fill="#f7931a"
+            />
+          </AreaChart>
+        </div>
+      </div>
+    );
+  }
+  render() {
+    const {
+      dollarAmountInvested,
+      coinAmount,
+      dataArr,
+      investedValue,
+      duration,
+      loading
+    } = this.state;
 
     return (
       <div className="Show">
@@ -122,53 +196,25 @@ class Show extends Component {
           onClick={() => this.handleSubmit()}
         />
 
-        <div className="Show__body   ">
-          <div className="row Show__body__row middle-xs">
-            <p className="RowHeading col-sm-2 ">Total</p>
-            <h2 className="RowValue">
-              ${this.roundToTwo(investedValue)}{" "}
-              <span style={{ color: "white" }}>/</span>{" "}
-              {this.roundToFive(coinAmount)}
-            </h2>
+        {!loading ? (
+          this._renderContent()
+        ) : (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              pointerEvents: "none"
+            }}
+          >
+            <div className="loader">Loading</div>
           </div>
-          <div className="row Show__body__row middle-xs">
-            <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
-            <h2 className="RowValue RowValue--small ">
-              ${this.roundToTwo(dollarAmountInvested)}{" "}
-              <span style={{ color: "white", fontSize: 18 }}>in</span>{" "}
-              {duration}{" "}
-              <span style={{ color: "white", fontSize: 18 }}>months</span>
-            </h2>
-          </div>
-
-          <div className="row Show__body__row middle-xs">
-            <p className="RowHeading RowHeading--small col-sm-2">Gained</p>
-            <h2 className="RowValue RowValue--small ">
-              ${this.roundToTwo(investedValue - dollarAmountInvested)}{" "}
-              <span style={{ color: "white", fontSize: 18 }}>for</span>{" "}
-              {this.getGrowth()}%{" "}
-              <span style={{ color: "white", fontSize: 18 }}>growth</span>
-            </h2>
-          </div>
-          <div className=" ">
-            <AreaChart width={980} height={250} data={dataArr}>
-              <XAxis hide dataKey={"date"} />
-              <Tooltip
-                contentStyle={{ background: "#444444", border: "none" }}
-                labelStyle={{ color: "#ebebeb" }}
-                labelFormatter={(value, name, props) => `Date : ${value}`}
-                formatter={(value, name, props) => `${value}`}
-              />
-              <Area
-                type="linear"
-                dataKey="Total"
-                stroke="none"
-                fillOpacity={1}
-                fill="#f7931a"
-              />
-            </AreaChart>
-          </div>
-        </div>
+        )}
       </div>
     );
   }
