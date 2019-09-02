@@ -12,9 +12,20 @@
   letter-spacing: 1px;
 }
 
+.Button--outline {
+  background: transparent;
+  border: 2px solid #f7931a;
+  color: #f7931a;
+}
+
 .Button:hover {
   cursor: pointer;
   color: #444;
+}
+
+.Button--outline:hover {
+  color: #444;
+  background: #f7931a;
 }
 
 .Button:focus {

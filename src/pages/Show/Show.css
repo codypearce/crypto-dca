@@ -1,0 +1,15 @@
+.Show {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-color: #333232;
+}
+
+.Show__body {
+  height: 100vh;
+  padding-top: 50px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+}
