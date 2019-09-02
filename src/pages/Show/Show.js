@@ -5,6 +5,7 @@ import Header from "../Home/Header/Header";
 import queryString from "query-string";
 import APIURL from "../../constants/API";
 import Button from "../../ui/Button/Button";
+import moment from "moment";
 
 class Show extends Component {
   state = {
@@ -17,6 +18,17 @@ class Show extends Component {
       ...params
     });
     this.getCoinData(params.start, params.end);
+    this.getDuration(params.start, params.end);
+  }
+
+  getDuration(start, end) {
+    let a = moment(start);
+    let b = moment(end);
+    let duration = b.diff(a, "days");
+    if (duration > 30) {
+      duration = b.diff(a, "months");
+    }
+    this.setState({ duration });
   }
   async getCoinData(startDate, endDate) {
     const dateString = `?start=${startDate}&end=${endDate}`;
@@ -79,8 +91,10 @@ class Show extends Component {
       dollarAmountInvested,
       coinAmount,
       dataArr,
-      investedValue
+      investedValue,
+      duration
     } = this.state;
+
     return (
       <div className="Show">
         <Header />
@@ -103,7 +117,10 @@ class Show extends Component {
           <div className="row Show__body__row middle-xs">
             <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
             <h2 className="RowValue RowValue--small ">
-              ${this.roundToTwo(dollarAmountInvested)}
+              ${this.roundToTwo(dollarAmountInvested)}{" "}
+              <span style={{ color: "white", fontSize: 18 }}>in</span>{" "}
+              {duration}{" "}
+              <span style={{ color: "white", fontSize: 18 }}>months</span>
             </h2>
           </div>
 
