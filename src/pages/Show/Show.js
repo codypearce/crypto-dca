@@ -93,7 +93,7 @@ class Show extends Component {
 
         <div className="Show__body col-xs-10  ">
           <div className="row Show__body__row middle-xs">
-            <p className="RowHeading col-xs-4 ">Total</p>
+            <p className="RowHeading col-sm-2 ">Total</p>
             <h2 className="RowValue">
               ${this.roundToTwo(investedValue)}{" "}
               <span style={{ color: "white" }}>/</span>{" "}
@@ -101,14 +101,14 @@ class Show extends Component {
             </h2>
           </div>
           <div className="row Show__body__row middle-xs">
-            <p className="RowHeading RowHeading--small col-xs-4">Invested</p>
+            <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
             <h2 className="RowValue RowValue--small ">
               ${this.roundToTwo(dollarAmountInvested)}
             </h2>
           </div>
 
           <div className="row Show__body__row middle-xs">
-            <p className="RowHeading RowHeading--small col-xs-4">Gained</p>
+            <p className="RowHeading RowHeading--small col-sm-2">Gained</p>
             <h2 className="RowValue RowValue--small ">
               ${this.roundToTwo(dollarAmountInvested)}{" "}
               <span style={{ color: "white", fontSize: 18 }}>for</span> 11%{" "}

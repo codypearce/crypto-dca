@@ -34,11 +34,23 @@
 }
 .RowValue {
   font-family: "Orbitron";
-  font-size: 60px;
+  font-size: 56px;
   color: #f7931a;
   font-weight: bold;
   margin: 0;
+  margin-top: 8px;
 }
 .RowValue--small {
   font-size: 30px;
+}
+
+@media (max-width: 767px) {
+  .Show__body__row {
+    flex-direction: column !important;
+    flex-wrap: noWrap !important;
+  }
+  .RowHeading,
+  .RowValue {
+    text-align: center;
+  }
 }
