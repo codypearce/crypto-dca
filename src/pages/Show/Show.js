@@ -30,6 +30,14 @@ class Show extends Component {
     }
     this.setState({ duration });
   }
+
+  getGrowth() {
+    const { dollarAmountInvested, investedValue } = this.state;
+    const value =
+      ((investedValue - dollarAmountInvested) / dollarAmountInvested) * 100;
+    return this.roundToTwo(value);
+  }
+
   async getCoinData(startDate, endDate) {
     const dateString = `?start=${startDate}&end=${endDate}`;
     const url = `${APIURL}${dateString}`;
@@ -127,8 +135,9 @@ class Show extends Component {
           <div className="row Show__body__row middle-xs">
             <p className="RowHeading RowHeading--small col-sm-2">Gained</p>
             <h2 className="RowValue RowValue--small ">
-              ${this.roundToTwo(dollarAmountInvested)}{" "}
-              <span style={{ color: "white", fontSize: 18 }}>for</span> 11%{" "}
+              ${this.roundToTwo(investedValue - dollarAmountInvested)}{" "}
+              <span style={{ color: "white", fontSize: 18 }}>for</span>{" "}
+              {this.getGrowth()}%{" "}
               <span style={{ color: "white", fontSize: 18 }}>growth</span>
             </h2>
           </div>
