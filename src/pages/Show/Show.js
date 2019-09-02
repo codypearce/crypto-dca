@@ -6,6 +6,14 @@ import queryString from "query-string";
 import APIURL from "../../constants/API";
 import Button from "../../ui/Button/Button";
 import moment from "moment";
+import {
+  AreaChart,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Area
+} from "recharts";
 
 class Show extends Component {
   state = {
@@ -69,7 +77,7 @@ class Show extends Component {
         dollarAmountInvested,
         coinAmount,
         coinValue: coinData[i].value,
-        investedValue: coinAmount * coinData[i].value,
+        Total: coinAmount * coinData[i].value,
         date: coinData[i].date
       });
     }
@@ -102,6 +110,7 @@ class Show extends Component {
       investedValue,
       duration
     } = this.state;
+    console.log(dataArr);
 
     return (
       <div className="Show">
@@ -113,7 +122,7 @@ class Show extends Component {
           onClick={() => this.handleSubmit()}
         />
 
-        <div className="Show__body col-xs-10  ">
+        <div className="Show__body   ">
           <div className="row Show__body__row middle-xs">
             <p className="RowHeading col-sm-2 ">Total</p>
             <h2 className="RowValue">
@@ -140,6 +149,18 @@ class Show extends Component {
               {this.getGrowth()}%{" "}
               <span style={{ color: "white", fontSize: 18 }}>growth</span>
             </h2>
+          </div>
+          <div className=" ">
+            <AreaChart width={980} height={250} data={dataArr}>
+              <Tooltip />
+              <Area
+                type="linear"
+                dataKey="Total"
+                stroke="none"
+                fillOpacity={1}
+                fill="#f7931a"
+              />
+            </AreaChart>
           </div>
         </div>
       </div>
