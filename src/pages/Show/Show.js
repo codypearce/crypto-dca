@@ -152,7 +152,13 @@ class Show extends Component {
           </div>
           <div className=" ">
             <AreaChart width={980} height={250} data={dataArr}>
-              <Tooltip />
+              <XAxis hide dataKey={"date"} />
+              <Tooltip
+                contentStyle={{ background: "#444444", border: "none" }}
+                labelStyle={{ color: "#ebebeb" }}
+                labelFormatter={(value, name, props) => `Date : ${value}`}
+                formatter={(value, name, props) => `${value}`}
+              />
               <Area
                 type="linear"
                 dataKey="Total"
