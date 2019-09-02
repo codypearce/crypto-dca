@@ -44,6 +44,7 @@ class Show extends Component {
     for (let i = 0; i < coinData.length; i += Number(freq)) {
       dollarAmountInvested += Number(amount);
       coinAmount += amount / coinData[i].value;
+
       dataArr.push({
         dollarAmountInvested,
         coinAmount,
@@ -58,6 +59,14 @@ class Show extends Component {
       dataArr,
       investedValue: coinAmount * coinData[coinData.length - 1].value
     });
+  }
+
+  roundToTwo(num) {
+    return +(Math.round(num + "e+2") + "e-2");
+  }
+
+  roundToFive(num) {
+    return +(Math.round(num + "e+5") + "e-5");
   }
 
   handleSubmit() {
@@ -84,20 +93,25 @@ class Show extends Component {
 
         <div className="Show__body col-xs-8  ">
           <div className="row Show__body__row middle-xs">
+            <p className="RowHeading col-xs-3">Invested</p>
+            <h2 className="RowValue">
+              ${this.roundToTwo(dollarAmountInvested)}
+            </h2>
+          </div>
+          <div className="row Show__body__row middle-xs">
             <p className="RowHeading col-xs-3 ">Total</p>
-            <h2 className="RowValue">${investedValue}</h2>
+            <h2 className="RowValue">${this.roundToTwo(investedValue)}</h2>
           </div>
           <div className="row Show__body__row middle-xs ">
             <p className="RowHeading col-xs-3">Coin</p>
-            <h2 className="RowValue">{coinAmount}</h2>
+            <h2 className="RowValue">{this.roundToFive(coinAmount)}</h2>
           </div>
-          <div className="row Show__body__row middle-xs">
-            <p className="RowHeading col-xs-3">Invested</p>
-            <h2 className="RowValue">${dollarAmountInvested}</h2>
-          </div>
+
           <div className="row Show__body__row middle-xs">
             <p className="RowHeading col-xs-3">Gained</p>
-            <h2 className="RowValue">${dollarAmountInvested}</h2>
+            <h2 className="RowValue">
+              ${this.roundToTwo(dollarAmountInvested)}
+            </h2>
           </div>
         </div>
       </div>
