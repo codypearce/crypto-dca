@@ -84,15 +84,19 @@ class Show extends Component {
 
         <div className="Show__body col-xs-12 middle-xs">
           <div className="row">
-            <p>Value</p>
-            <h2>{investedValue}</h2>
+            <p className="RowHeading col-xs-3">Total</p>
+            <h2 className="col-xs-6">{investedValue}</h2>
           </div>
           <div className="row">
-            <p>Coin</p>
+            <p className="RowHeading">Coin</p>
             <h2>{coinAmount}</h2>
           </div>
           <div className="row">
-            <p>Dollar</p>
+            <p className="RowHeading">Invested</p>
+            <h2>{dollarAmountInvested}</h2>
+          </div>
+          <div className="row">
+            <p className="RowHeading">Gained</p>
             <h2>{dollarAmountInvested}</h2>
           </div>
         </div>

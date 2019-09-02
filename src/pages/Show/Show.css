@@ -13,3 +13,10 @@
   display: flex;
   flex-direction: column;
 }
+
+.RowHeading {
+  font-family: "Orbitron";
+  font-size: 40px;
+  color: #fff;
+  font-weight: bold;
+}
