@@ -205,7 +205,7 @@ class Show extends Component {
     } = this.state;
     return (
       <div className="Show__body  col-xs-12 middle-xs ">
-        <div className="card">
+        <div className="card Show__card">
           <div className="row Show__body__row middle-xs">
             <p className="RowHeading col-sm-2 ">Total</p>
             <h2 className="RowValue">
