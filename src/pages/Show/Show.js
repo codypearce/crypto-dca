@@ -203,69 +203,71 @@ class Show extends Component {
       freq
     } = this.state;
     return (
-      <div className="Show__body   ">
-        <div className="row Show__body__row middle-xs">
-          <p className="RowHeading col-sm-2 ">Total</p>
-          <h2 className="RowValue">
-            ${this.numberWithCommas(this.roundToTwo(investedValue))}{" "}
-            <span style={{ color: "white" }}>/</span>{" "}
-            {this.roundToFive(coinAmount)}
-          </h2>
-        </div>
-        <div className="row Show__body__row middle-xs">
-          <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
-          <h2 className="RowValue RowValue--small ">
-            ${this.numberWithCommas(this.roundToTwo(dollarAmountInvested))}{" "}
-            <span style={{ color: "white", fontSize: 18 }}>in</span>{" "}
-            {durationDisplay}{" "}
-            <span style={{ color: "white", fontSize: 18 }}>months</span>
-          </h2>
-        </div>
+      <div className="Show__body  col-xs-12 middle-xs ">
+        <div className="card">
+          <div className="row Show__body__row middle-xs">
+            <p className="RowHeading col-sm-2 ">Total</p>
+            <h2 className="RowValue">
+              ${this.numberWithCommas(this.roundToTwo(investedValue))}{" "}
+              <span style={{ color: "white" }}>/</span>{" "}
+              {this.roundToFive(coinAmount)}
+            </h2>
+          </div>
+          <div className="row Show__body__row middle-xs">
+            <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
+            <h2 className="RowValue RowValue--small ">
+              ${this.numberWithCommas(this.roundToTwo(dollarAmountInvested))}{" "}
+              <span style={{ color: "white", fontSize: 18 }}>in</span>{" "}
+              {durationDisplay}{" "}
+              <span style={{ color: "white", fontSize: 18 }}>months</span>
+            </h2>
+          </div>
 
-        <div className="row Show__body__row middle-xs">
-          <p className="RowHeading RowHeading--small col-sm-2">Gained</p>
-          <h2 className="RowValue RowValue--small ">
-            $
-            {this.numberWithCommas(
-              this.roundToTwo(investedValue - dollarAmountInvested)
-            )}{" "}
-            <span style={{ color: "white", fontSize: 18 }}>for</span>{" "}
-            {this.getGrowth()}%{" "}
-            <span style={{ color: "white", fontSize: 18 }}>growth</span>
-          </h2>
-        </div>
-        <div className=" ">
-          {this._validateFreqOverDuration(freq, duration) ? (
-            <div
-              style={{
-                fontSize: 18,
-                color: "white",
-                lineHeight: 1.5,
-                maxWidth: 500
-              }}
-            >
-              No graph available. Since the frequency is larger than the number
-              of days between the start and end date, there is only one
-              investment.
-            </div>
-          ) : (
-            <AreaChart width={980} height={250} data={dataArr}>
-              <XAxis hide dataKey={"date"} />
-              <Tooltip
-                contentStyle={{ background: "#444444", border: "none" }}
-                labelStyle={{ color: "#ebebeb" }}
-                labelFormatter={(value, name, props) => `Date : ${value}`}
-                formatter={(value, name, props) => `${value}`}
-              />
-              <Area
-                type="linear"
-                dataKey="Total"
-                stroke="none"
-                fillOpacity={1}
-                fill="#f7931a"
-              />
-            </AreaChart>
-          )}
+          <div className="row Show__body__row middle-xs">
+            <p className="RowHeading RowHeading--small col-sm-2">Gained</p>
+            <h2 className="RowValue RowValue--small ">
+              $
+              {this.numberWithCommas(
+                this.roundToTwo(investedValue - dollarAmountInvested)
+              )}{" "}
+              <span style={{ color: "white", fontSize: 18 }}>for</span>{" "}
+              {this.getGrowth()}%{" "}
+              <span style={{ color: "white", fontSize: 18 }}>growth</span>
+            </h2>
+          </div>
+          <div className=" ">
+            {this._validateFreqOverDuration(freq, duration) ? (
+              <div
+                style={{
+                  fontSize: 18,
+                  color: "white",
+                  lineHeight: 1.5,
+                  maxWidth: 500
+                }}
+              >
+                No graph available. Since the frequency is larger than the
+                number of days between the start and end date, there is only one
+                investment.
+              </div>
+            ) : (
+              <AreaChart width={980} height={250} data={dataArr}>
+                <XAxis hide dataKey={"date"} />
+                <Tooltip
+                  contentStyle={{ background: "#444444", border: "none" }}
+                  labelStyle={{ color: "#ebebeb" }}
+                  labelFormatter={(value, name, props) => `Date : ${value}`}
+                  formatter={(value, name, props) => `${value}`}
+                />
+                <Area
+                  type="linear"
+                  dataKey="Total"
+                  stroke="none"
+                  fillOpacity={1}
+                  fill="#f7931a"
+                />
+              </AreaChart>
+            )}
+          </div>
         </div>
       </div>
     );

@@ -1,11 +1,7 @@
 .Show__body {
-  padding-top: 160px;
-  width: 100%;
-
   display: flex;
   flex-direction: column;
-  margin: auto;
-  align-items: center;
+  position: relative;
 }
 
 .Show__body__row {
