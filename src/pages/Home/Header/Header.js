@@ -1,16 +1,17 @@
 import React from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="row start-xs middle-xs header">
       <div className="row">
-        <a href="/" className="link header_link">
+        <Link to="/" className="link header_link">
           Home
-        </a>
-        <a href="/" className="link header_link">
+        </Link>
+        <Link to="/about" className="link header_link">
           About
-        </a>
+        </Link>
       </div>
 
       <h1 className="header_title">CRYPTO DCA</h1>
