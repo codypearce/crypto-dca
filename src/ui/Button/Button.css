@@ -31,3 +31,11 @@
 .Button:focus {
   outline: none;
 }
+.Button--disabled {
+  background: grey;
+  color: rgba(255, 255, 255, 0.5);
+}
+.Button--disabled:hover {
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+}

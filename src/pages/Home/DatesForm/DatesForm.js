@@ -19,24 +19,41 @@ class DatesForm extends Component {
     frequency: null,
     amount: null,
     startDate: null,
-    endDate: null
+    endDate: null,
+    isValid: false
   };
 
   _updateAmount = value => {
-    this.setState({
-      amount: value.target.value
-    });
+    this.setState(
+      {
+        amount: value.target.value
+      },
+      () => this._isValid()
+    );
   };
 
   _updateFrequency(value) {
-    this.setState({
-      frequency: value
-    });
+    this.setState(
+      {
+        frequency: value
+      },
+      () => this._isValid()
+    );
   }
   handleChange(value, type) {
-    this.setState({
-      [type]: value
-    });
+    this.setState(
+      {
+        [type]: value
+      },
+      () => this._isValid()
+    );
+  }
+
+  _isValid() {
+    const { frequency, amount, startDate, endDate } = this.state;
+    const isValid = frequency && amount > 0 && startDate && endDate;
+
+    this.setState({ isValid });
   }
 
   getFrequencyNumeric() {
@@ -68,7 +85,7 @@ class DatesForm extends Component {
   }
 
   render() {
-    const { frequency, amount, startDate, endDate } = this.state;
+    const { frequency, amount, startDate, endDate, isValid } = this.state;
 
     const frequencyTypes = [
       "Everyday",
@@ -114,7 +131,11 @@ class DatesForm extends Component {
           />
         </div>
         <div className="row center-xs">
-          <Button text={"Submit"} onClick={() => this.handleSubmit()} />
+          <Button
+            text={"Submit"}
+            onClick={() => this.handleSubmit()}
+            disabled={!isValid}
+          />
         </div>
       </div>
     );
