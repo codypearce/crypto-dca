@@ -1,6 +1,6 @@
 import React from "react";
 
-function MountainSVG({ windowWidth, windowHeight }) {
+function MountainSVG({}) {
   return (
     <svg
       viewBox="0 0 633 534"

@@ -6,7 +6,6 @@ import DatesForm from "./DatesForm/DatesForm";
 
 class Home extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className="home">
         <Header />
