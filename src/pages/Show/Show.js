@@ -12,7 +12,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Area
+  Area,
+  ResponsiveContainer
 } from "recharts";
 import { frequencyTypes, btcStart, coindeskStart } from "../../constants/dates";
 
@@ -235,7 +236,7 @@ class Show extends Component {
               <span style={{ color: "white", fontSize: 18 }}>growth</span>
             </h2>
           </div>
-          <div className=" ">
+          <div style={{ width: "100%" }}>
             {this._validateFreqOverDuration(freq, duration) ? (
               <div
                 style={{
@@ -250,22 +251,24 @@ class Show extends Component {
                 investment.
               </div>
             ) : (
-              <AreaChart width={980} height={250} data={dataArr}>
-                <XAxis hide dataKey={"date"} />
-                <Tooltip
-                  contentStyle={{ background: "#444444", border: "none" }}
-                  labelStyle={{ color: "#ebebeb" }}
-                  labelFormatter={(value, name, props) => `Date : ${value}`}
-                  formatter={(value, name, props) => `${value}`}
-                />
-                <Area
-                  type="linear"
-                  dataKey="Total"
-                  stroke="none"
-                  fillOpacity={1}
-                  fill="#f7931a"
-                />
-              </AreaChart>
+              <ResponsiveContainer height={250}>
+                <AreaChart data={dataArr}>
+                  <XAxis hide dataKey={"date"} />
+                  <Tooltip
+                    contentStyle={{ background: "#444444", border: "none" }}
+                    labelStyle={{ color: "#ebebeb" }}
+                    labelFormatter={(value, name, props) => `Date : ${value}`}
+                    formatter={(value, name, props) => `${value}`}
+                  />
+                  <Area
+                    type="linear"
+                    dataKey="Total"
+                    stroke="none"
+                    fillOpacity={1}
+                    fill="#f7931a"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
             )}
           </div>
         </div>
