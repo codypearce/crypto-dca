@@ -348,7 +348,12 @@ class Show extends Component {
         <Header />
         <Button
           type="outline"
-          style={{ marginTop: 70, marginLeft: 24, position: "absolute" }}
+          style={{
+            marginTop: 70,
+            marginLeft: 24,
+            position: "absolute",
+            zIndex: 20
+          }}
           text={"Back"}
           onClick={() => this.handleSubmit()}
         />

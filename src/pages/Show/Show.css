@@ -4,6 +4,12 @@
   position: relative;
 }
 
+.Show__button {
+  margin-top: 70px;
+  margin-left: 24px;
+  position: absolute;
+}
+
 .Show__body__row {
   width: 100%;
   margin-bottom: 20px;

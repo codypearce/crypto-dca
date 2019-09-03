@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./Button.css";
 
-const Button = ({ text, type, onClick, style, disabled }) => {
+const Button = ({ text, type, onClick, style, disabled, ...props }) => {
   return (
     <button
       className={`Button ${type == "outline" ? "Button--outline" : ""}  ${
@@ -11,6 +11,7 @@ const Button = ({ text, type, onClick, style, disabled }) => {
       } `}
       style={style}
       onClick={onClick}
+      {...props}
     >
       {text}
     </button>
