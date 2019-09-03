@@ -42,6 +42,7 @@ class Show extends Component {
     error = this._validateFrequency(freq);
     error = this._validateStartDate(startDate);
     error = this._validateEndDate(endDate);
+    error = this._validateDatesOverlap(startDate, endDate);
 
     if (error && error.length > 0) {
       this.setState({ error });
@@ -94,6 +95,12 @@ class Show extends Component {
     if (endDate.isAfter(moment())) error = "End Date cannot be after today";
 
     return error;
+  }
+
+  _validateDatesOverlap(startDate, endDate) {
+    const difference = endDate.diff(startDate, "days");
+
+    if (difference < 1) return "The start date has to be before the end date";
   }
 
   getDuration(start, end) {
