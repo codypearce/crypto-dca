@@ -38,11 +38,11 @@ class Show extends Component {
     let startDate = moment(start);
     let endDate = moment(end);
 
-    error = this._validateAmount(amount);
-    error = this._validateFrequency(freq);
-    error = this._validateStartDate(startDate);
-    error = this._validateEndDate(endDate);
-    error = this._validateDatesOverlap(startDate, endDate);
+    error = this._validateAmount(amount) || error;
+    error = this._validateFrequency(freq) || error;
+    error = this._validateStartDate(startDate) || error;
+    error = this._validateEndDate(endDate) || error;
+    error = this._validateDatesOverlap(startDate, endDate) || error;
 
     if (error && error.length > 0) {
       this.setState({ error });
@@ -87,7 +87,10 @@ class Show extends Component {
 
   _validateEndDate(endDate) {
     let error = null;
-    if (!endDate.isValid()) error = "End Date is not a valid date";
+
+    if (!endDate.isValid()) {
+      error = "End Date is not a valid date";
+    }
 
     if (endDate.isBefore(moment(coindeskStart).add(1, "day")))
       error = "End Date cannot be before 2009-01-13 due to API limitations";
