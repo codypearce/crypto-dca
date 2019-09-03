@@ -44,7 +44,6 @@ class Show extends Component {
     error = this._validateStartDate(startDate) || error;
     error = this._validateEndDate(endDate) || error;
     error = this._validateDatesOverlap(duration) || error;
-    error = this._validateFreqOverDuration(freq, duration) || error;
 
     if (error && error.length > 0) {
       this.setState({ error });
@@ -111,8 +110,7 @@ class Show extends Component {
   }
 
   _validateFreqOverDuration(freq, duration) {
-    if (freq >= duration)
-      return "The number of days between start and end date needs to be larger than the frequency otherwise you will simply have the gains from your initial deposit";
+    return freq >= duration;
   }
 
   getDuration(a, b) {
@@ -198,7 +196,8 @@ class Show extends Component {
       coinAmount,
       dataArr,
       investedValue,
-      duration
+      duration,
+      freq
     } = this.state;
     return (
       <div className="Show__body   ">
@@ -232,22 +231,37 @@ class Show extends Component {
           </h2>
         </div>
         <div className=" ">
-          <AreaChart width={980} height={250} data={dataArr}>
-            <XAxis hide dataKey={"date"} />
-            <Tooltip
-              contentStyle={{ background: "#444444", border: "none" }}
-              labelStyle={{ color: "#ebebeb" }}
-              labelFormatter={(value, name, props) => `Date : ${value}`}
-              formatter={(value, name, props) => `${value}`}
-            />
-            <Area
-              type="linear"
-              dataKey="Total"
-              stroke="none"
-              fillOpacity={1}
-              fill="#f7931a"
-            />
-          </AreaChart>
+          {this._validateFreqOverDuration(freq, duration) ? (
+            <div
+              style={{
+                fontSize: 18,
+                color: "white",
+                lineHeight: 1.5,
+                maxWidth: 500
+              }}
+            >
+              No graph available. Since the frequency is larger than the number
+              of days between the start and end date, there is only one
+              investment.
+            </div>
+          ) : (
+            <AreaChart width={980} height={250} data={dataArr}>
+              <XAxis hide dataKey={"date"} />
+              <Tooltip
+                contentStyle={{ background: "#444444", border: "none" }}
+                labelStyle={{ color: "#ebebeb" }}
+                labelFormatter={(value, name, props) => `Date : ${value}`}
+                formatter={(value, name, props) => `${value}`}
+              />
+              <Area
+                type="linear"
+                dataKey="Total"
+                stroke="none"
+                fillOpacity={1}
+                fill="#f7931a"
+              />
+            </AreaChart>
+          )}
         </div>
       </div>
     );
