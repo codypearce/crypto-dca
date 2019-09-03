@@ -4,6 +4,9 @@ body,
   height: 100%;
   width: 100%;
 }
+body {
+  background-color: #232323;
+}
 
 .row {
   margin-left: 0 !important;

@@ -6,7 +6,12 @@ function MountainSVG({ windowWidth, windowHeight }) {
       viewBox="0 0 633 534"
       width={633}
       height={534}
-      style={{ position: "absolute", bottom: 0, right: 0, zIndex: 0 }}
+      style={{
+        position: "fixed",
+        bottom: 0,
+        right: 0,
+        zIndex: -1
+      }}
     >
       <g>
         <path

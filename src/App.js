@@ -6,7 +6,7 @@ import Home from "./pages/Home/Home";
 import Show from "./pages/Show/Show";
 
 import ReactResizeDetector from "react-resize-detector";
-
+import MountainSVG from "./ui/MountainSVG/MountainSVG";
 class App extends Component {
   state = {
     width: 1080
@@ -17,7 +17,6 @@ class App extends Component {
     this.setState({ width });
   };
   onResize = (width, height) => {
-    console.log(width, height);
     this.setState({ width, height });
   };
   render() {
@@ -27,7 +26,6 @@ class App extends Component {
         <div
           style={{
             position: "relative",
-            backgroundColor: "#232323",
             height: "100%",
             width: "100%"
           }}
@@ -48,6 +46,7 @@ class App extends Component {
               path="/show"
               component={() => <Show width={width} height={height} />}
             />
+            <MountainSVG />
           </ReactResizeDetector>
         </div>
       </BrowserRouter>

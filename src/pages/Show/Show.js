@@ -14,7 +14,6 @@ import {
   Tooltip,
   Area
 } from "recharts";
-import MountainSVG from "../../ui/MountainSVG/MountainSVG";
 
 class Show extends Component {
   state = {
@@ -216,7 +215,6 @@ class Show extends Component {
             <div className="loader">Loading</div>
           </div>
         )}
-        <MountainSVG />
       </div>
     );
   }

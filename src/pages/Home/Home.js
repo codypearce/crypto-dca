@@ -3,15 +3,13 @@ import "./Home.css";
 
 import Header from "./Header/Header";
 import DatesForm from "./DatesForm/DatesForm";
-import MountainSVG from "../../ui/MountainSVG/MountainSVG";
+
 class Home extends Component {
   render() {
-    const { width, height } = this.props;
-
     return (
       <div className="home">
         <Header />
-        <MountainSVG windowWidth={width} windowHeight={height} />
+
         <div className="home_body col-xs-12 middle-xs">
           <div className="card">
             <h1 className="title">CRYPTO DCA</h1>
