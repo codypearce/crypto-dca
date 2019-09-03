@@ -37,12 +37,13 @@ class Show extends Component {
     let error = null;
     let startDate = moment(start);
     let endDate = moment(end);
+    const duration = this.getDuration(startDate, endDate);
 
     error = this._validateAmount(amount) || error;
     error = this._validateFrequency(freq) || error;
     error = this._validateStartDate(startDate) || error;
     error = this._validateEndDate(endDate) || error;
-    error = this._validateDatesOverlap(startDate, endDate) || error;
+    error = this._validateDatesOverlap(duration) || error;
 
     if (error && error.length > 0) {
       this.setState({ error });
@@ -51,10 +52,10 @@ class Show extends Component {
 
     this.setState({
       ...params,
-      loading: true
+      loading: true,
+      duration
     });
     this.getCoinData(start, end);
-    this.getDuration(start, end);
   }
 
   _validateAmount(amount) {
@@ -77,7 +78,7 @@ class Show extends Component {
     if (!startDate.isValid()) error = "Start Date is not a valid date";
 
     if (startDate.isBefore(moment(coindeskStart)))
-      error = "Start Date cannot be before 2009-01-12 due to API limitations";
+      error = "Start Date cannot be before 2009-01-12";
 
     if (startDate.isAfter(moment().subtract(1, "day")))
       error = "Start Date cannot be after yesterday";
@@ -93,27 +94,23 @@ class Show extends Component {
     }
 
     if (endDate.isBefore(moment(coindeskStart).add(1, "day")))
-      error = "End Date cannot be before 2009-01-13 due to API limitations";
+      error = "End Date cannot be before 2009-01-13";
 
     if (endDate.isAfter(moment())) error = "End Date cannot be after today";
 
     return error;
   }
 
-  _validateDatesOverlap(startDate, endDate) {
-    const difference = endDate.diff(startDate, "days");
-
-    if (difference < 1) return "The start date has to be before the end date";
+  _validateDatesOverlap(duration) {
+    if (duration < 1) return "The start date has to be before the end date";
   }
 
-  getDuration(start, end) {
-    let a = moment(start);
-    let b = moment(end);
+  getDuration(b, a) {
     let duration = b.diff(a, "days");
     if (duration > 30) {
       duration = b.diff(a, "months");
     }
-    this.setState({ duration });
+    return duration;
   }
 
   getGrowth() {
