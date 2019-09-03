@@ -24,9 +24,13 @@ class DatesForm extends Component {
   };
 
   _updateAmount = value => {
+    const amount = value.target.value;
+    if (!Number.isInteger(Number(amount))) return;
+    if (amount < 0) return;
+
     this.setState(
       {
-        amount: value.target.value
+        amount
       },
       () => this._isValid()
     );

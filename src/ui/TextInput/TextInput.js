@@ -20,6 +20,7 @@ export default class TextInput extends Component {
           onChange={onChange}
           className="TextInput__input"
           value={value || ""}
+          min="0"
         />
       </div>
     );
