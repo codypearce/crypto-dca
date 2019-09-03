@@ -322,20 +322,22 @@ class Show extends Component {
             pointerEvents: "none"
           }}
         >
-          <div style={{ fontSize: 48, color: "#c0392b" }}>Error</div>
-          <div
-            style={{
-              fontSize: 32,
-              color: "white",
-              marginBottom: 16,
-              marginTop: 8,
-              maxWidth: 500
-            }}
-          >
-            {error}.
-          </div>
-          <div style={{ fontSize: 24, color: "white" }}>
-            Please try again with valid data
+          <div className="card" style={{ padding: 8 }}>
+            <div style={{ fontSize: 48, color: "#c0392b" }}>Error</div>
+            <div
+              style={{
+                fontSize: 32,
+                color: "white",
+                marginBottom: 16,
+                marginTop: 8,
+                maxWidth: 500
+              }}
+            >
+              {error}.
+            </div>
+            <div style={{ fontSize: 24, color: "white" }}>
+              Please try again with valid data
+            </div>
           </div>
         </div>
       );
