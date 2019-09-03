@@ -22,33 +22,33 @@ class App extends Component {
   render() {
     const { width, height } = this.state;
     return (
-      <BrowserRouter>
-        <div
-          style={{
-            position: "relative",
-            height: "100%",
-            width: "100%"
-          }}
-        >
-          <ReactResizeDetector
-            handleWidth
-            handleHeight
-            onResize={this.onResize}
+      <ReactResizeDetector handleWidth handleHeight onResize={this.onResize}>
+        <BrowserRouter>
+          <div
+            style={{
+              position: "relative",
+              height: "100%",
+              width: "100%"
+            }}
           >
             <Route
               exact
               path="/"
-              component={() => <Home width={width} height={height} />}
+              component={props => (
+                <Home {...props} width={width} height={height} />
+              )}
             />
             <Route
               exact
               path="/show"
-              component={() => <Show width={width} height={height} />}
+              component={props => (
+                <Show {...props} width={width} height={height} />
+              )}
             />
             <MountainSVG />
-          </ReactResizeDetector>
-        </div>
-      </BrowserRouter>
+          </div>
+        </BrowserRouter>
+      </ReactResizeDetector>
     );
   }
 }
