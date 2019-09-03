@@ -37,17 +37,22 @@ class Show extends Component {
     let error = null;
     let startDate = moment(start);
     let endDate = moment(end);
-    const duration = this.getDuration(startDate, endDate);
+    let duration = this.getDuration(startDate, endDate);
 
     error = this._validateAmount(amount) || error;
     error = this._validateFrequency(freq) || error;
     error = this._validateStartDate(startDate) || error;
     error = this._validateEndDate(endDate) || error;
     error = this._validateDatesOverlap(duration) || error;
+    error = this._validateFreqOverDuration(freq, duration) || error;
 
     if (error && error.length > 0) {
       this.setState({ error });
       return;
+    }
+
+    if (duration > 30) {
+      duration = endDate.diff(startDate, "months");
     }
 
     this.setState({
@@ -105,11 +110,14 @@ class Show extends Component {
     if (duration < 1) return "The start date has to be before the end date";
   }
 
-  getDuration(b, a) {
+  _validateFreqOverDuration(freq, duration) {
+    if (freq >= duration)
+      return "The number of days between start and end date needs to be larger than the frequency otherwise you will simply have the gains from your initial deposit";
+  }
+
+  getDuration(a, b) {
     let duration = b.diff(a, "days");
-    if (duration > 30) {
-      duration = b.diff(a, "months");
-    }
+
     return duration;
   }
 
@@ -297,7 +305,8 @@ class Show extends Component {
               fontSize: 32,
               color: "white",
               marginBottom: 16,
-              marginTop: 8
+              marginTop: 8,
+              maxWidth: 500
             }}
           >
             {error}.
