@@ -17,6 +17,15 @@ import {
 } from "recharts";
 import { frequencyTypes, btcStart, coindeskStart } from "../../constants/dates";
 
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  RedditShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  RedditIcon
+} from "react-share";
+
 class Show extends Component {
   state = {
     params: null,
@@ -203,6 +212,7 @@ class Show extends Component {
       duration,
       freq
     } = this.state;
+
     return (
       <div className="Show__body  col-xs-12 middle-xs ">
         <div className="card Show__card">
@@ -272,6 +282,21 @@ class Show extends Component {
             )}
           </div>
         </div>
+        {this._validateFreqOverDuration(freq, duration) ? (
+          ""
+        ) : (
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <FacebookShareButton url={window.location.href}>
+              <FacebookIcon size={28} />
+            </FacebookShareButton>
+            <TwitterShareButton url={window.location.href}>
+              <TwitterIcon size={28} />
+            </TwitterShareButton>
+            <RedditShareButton url={window.location.href}>
+              <RedditIcon size={28} />
+            </RedditShareButton>
+          </div>
+        )}
       </div>
     );
   }
@@ -352,7 +377,7 @@ class Show extends Component {
             marginTop: 70,
             marginLeft: 24,
             position: "absolute",
-            zIndex: 20
+            zIndex: 200
           }}
           text={"Back"}
           onClick={() => this.handleSubmit()}
