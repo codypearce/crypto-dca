@@ -14,26 +14,72 @@ import {
   Tooltip,
   Area
 } from "recharts";
+import { frequencyTypes, btcStart, coindeskStart } from "../../constants/dates";
 
 class Show extends Component {
   state = {
     params: null,
-    loading: true
+    loading: true,
+    error: false
   };
   componentDidMount() {
     const params = queryString.parse(this.props.location.search);
 
-    this.setState({
-      ...params,
-      loading: true
-    });
-    this.getCoinData(params.start, params.end);
-    this.getDuration(params.start, params.end);
+    this.validateValues(params);
   }
 
   componentWillUnmount = () => {
     clearTimeout(this.timeout);
   };
+
+  validateValues(params) {
+    const { amount, end, start, freq } = params;
+    let error = null;
+
+    if (amount < 1) {
+      error = "Amount cannot be less than 1";
+    }
+    if (freq < 1) {
+      error = "Frequency cannot be less than 1";
+    }
+    let startDate = moment(start);
+    let endDate = moment(end);
+
+    if (!startDate.isValid()) {
+      error = "Start Date is not a valid date";
+    }
+    if (!endDate.isValid()) {
+      error = "End Date is not a valid date";
+    }
+
+    if (startDate.isBefore(moment(coindeskStart))) {
+      error = "Start Date cannot be before 2009-01-12 due to API limitations";
+    }
+
+    if (startDate.isAfter(moment().subtract(1, "day"))) {
+      error = "Start Date cannot be after yesterday";
+    }
+
+    if (endDate.isBefore(moment(coindeskStart).add(1, "day"))) {
+      error = "End Date cannot be before 2009-01-13 due to API limitations";
+    }
+
+    if (endDate.isAfter(moment())) {
+      error = "End Date cannot be after today";
+    }
+
+    if (error && error.length > 0) {
+      this.setState({ error });
+      return;
+    }
+
+    this.setState({
+      ...params,
+      loading: true
+    });
+    this.getCoinData(start, end);
+    this.getDuration(start, end);
+  }
 
   getDuration(start, end) {
     let a = moment(start);
@@ -183,8 +229,63 @@ class Show extends Component {
       dataArr,
       investedValue,
       duration,
-      loading
+      loading,
+      error
     } = this.state;
+
+    let content = !loading ? (
+      this._renderContent()
+    ) : (
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          pointerEvents: "none"
+        }}
+      >
+        <div className="loader">Loading</div>
+      </div>
+    );
+
+    if (error) {
+      content = (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            pointerEvents: "none"
+          }}
+        >
+          <div style={{ fontSize: 48, color: "#c0392b" }}>Error</div>
+          <div
+            style={{
+              fontSize: 32,
+              color: "white",
+              marginBottom: 16,
+              marginTop: 8
+            }}
+          >
+            {error}.
+          </div>
+          <div style={{ fontSize: 24, color: "white" }}>
+            Please try again with valid data
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div className="Show">
@@ -196,25 +297,7 @@ class Show extends Component {
           onClick={() => this.handleSubmit()}
         />
 
-        {!loading ? (
-          this._renderContent()
-        ) : (
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              pointerEvents: "none"
-            }}
-          >
-            <div className="loader">Loading</div>
-          </div>
-        )}
+        {content}
       </div>
     );
   }

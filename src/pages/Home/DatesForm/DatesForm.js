@@ -4,6 +4,11 @@ import PropTypes from "prop-types";
 import "./DatesForm.css";
 
 import moment from "moment";
+import {
+  frequencyTypes,
+  btcStart,
+  coindeskStart
+} from "../../../constants/dates";
 
 import ButtonDropdown from "../../../ui/ButtonDropdown/ButtonDropdown";
 import TextInput from "../../../ui/TextInput/TextInput";
@@ -90,17 +95,6 @@ class DatesForm extends Component {
 
   render() {
     const { frequency, amount, startDate, endDate, isValid } = this.state;
-
-    const frequencyTypes = [
-      "Everyday",
-      "Every Other Day",
-      "Every Week",
-      "Every Two Weeks",
-      "Every Month",
-      "Every Two Months"
-    ];
-    const btcStart = "2009-01-12";
-    const coindeskStart = "2010-07-17";
 
     return (
       <div className="DatesForm">
