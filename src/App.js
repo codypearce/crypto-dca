@@ -29,7 +29,6 @@ class App extends Component {
             height: "100%",
             width: "100%"
           }}
-          onLayout={this.handleLayout}
         >
           <ReactResizeDetector
             handleWidth

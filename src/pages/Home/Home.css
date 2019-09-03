@@ -36,3 +36,10 @@
   margin-bottom: 40px;
   display: inline-block;
 }
+
+@media (max-width: 500px) {
+  .title {
+    text-align: center;
+    font-size: 70px;
+  }
+}
