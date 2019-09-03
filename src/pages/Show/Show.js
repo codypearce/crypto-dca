@@ -50,14 +50,16 @@ class Show extends Component {
       return;
     }
 
+    let durationDisplay = duration;
     if (duration > 30) {
-      duration = endDate.diff(startDate, "months");
+      durationDisplay = endDate.diff(startDate, "months");
     }
 
     this.setState({
       ...params,
       loading: true,
-      duration
+      duration,
+      durationDisplay
     });
     this.getCoinData(start, end);
   }
@@ -196,6 +198,7 @@ class Show extends Component {
       coinAmount,
       dataArr,
       investedValue,
+      durationDisplay,
       duration,
       freq
     } = this.state;
@@ -213,7 +216,8 @@ class Show extends Component {
           <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
           <h2 className="RowValue RowValue--small ">
             ${this.numberWithCommas(this.roundToTwo(dollarAmountInvested))}{" "}
-            <span style={{ color: "white", fontSize: 18 }}>in</span> {duration}{" "}
+            <span style={{ color: "white", fontSize: 18 }}>in</span>{" "}
+            {durationDisplay}{" "}
             <span style={{ color: "white", fontSize: 18 }}>months</span>
           </h2>
         </div>
