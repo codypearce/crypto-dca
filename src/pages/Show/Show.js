@@ -40,30 +40,8 @@ class Show extends Component {
 
     error = this._validateAmount(amount);
     error = this._validateFrequency(freq);
-    error = this._validStartDate(startDate);
-
-    if (!startDate.isValid()) {
-      error = "Start Date is not a valid date";
-    }
-    if (!endDate.isValid()) {
-      error = "End Date is not a valid date";
-    }
-
-    if (startDate.isBefore(moment(coindeskStart))) {
-      error = "Start Date cannot be before 2009-01-12 due to API limitations";
-    }
-
-    if (startDate.isAfter(moment().subtract(1, "day"))) {
-      error = "Start Date cannot be after yesterday";
-    }
-
-    if (endDate.isBefore(moment(coindeskStart).add(1, "day"))) {
-      error = "End Date cannot be before 2009-01-13 due to API limitations";
-    }
-
-    if (endDate.isAfter(moment())) {
-      error = "End Date cannot be after today";
-    }
+    error = this._validateStartDate(startDate);
+    error = this._validateEndDate(endDate);
 
     if (error && error.length > 0) {
       this.setState({ error });
@@ -93,7 +71,7 @@ class Show extends Component {
     return error;
   }
 
-  _validStartDate(startDate) {
+  _validateStartDate(startDate) {
     let error = null;
     if (!startDate.isValid()) error = "Start Date is not a valid date";
 
@@ -102,6 +80,18 @@ class Show extends Component {
 
     if (startDate.isAfter(moment().subtract(1, "day")))
       error = "Start Date cannot be after yesterday";
+
+    return error;
+  }
+
+  _validateEndDate(endDate) {
+    let error = null;
+    if (!endDate.isValid()) error = "End Date is not a valid date";
+
+    if (endDate.isBefore(moment(coindeskStart).add(1, "day")))
+      error = "End Date cannot be before 2009-01-13 due to API limitations";
+
+    if (endDate.isAfter(moment())) error = "End Date cannot be after today";
 
     return error;
   }
