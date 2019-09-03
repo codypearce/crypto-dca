@@ -61,3 +61,13 @@
   background-color: #f7931a;
   color: #444444;
 }
+
+@media (max-width: 500px) {
+  .dropdown {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .dropdown_button {
+    width: 100%;
+  }
+}

@@ -19,3 +19,13 @@
   display: block;
   font-size: 18px;
 }
+
+@media (max-width: 500px) {
+  .TextInput {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .TextInput__input {
+    width: 100%;
+  }
+}

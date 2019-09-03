@@ -151,3 +151,12 @@
 .react-datepicker__navigation--years-upcoming {
   border-bottom-color: #444;
 }
+
+@media (max-width: 500px) {
+  .react-datepicker__input-container {
+    width: 100%;
+  }
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+}

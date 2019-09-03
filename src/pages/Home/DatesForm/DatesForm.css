@@ -6,3 +6,11 @@
 .DatesForm__row {
   margin-bottom: 40px;
 }
+
+@media (max-width: 500px) {
+  .DatesForm__row {
+    flex-direction: column !important;
+    align-items: center;
+    margin-bottom: 0;
+  }
+}
