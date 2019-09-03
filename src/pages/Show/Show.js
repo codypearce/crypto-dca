@@ -35,11 +35,12 @@ class Show extends Component {
   validateValues(params) {
     const { amount, end, start, freq } = params;
     let error = null;
-    error = this._validateAmount(amount);
-    error = this._validateFrequency(freq);
-
     let startDate = moment(start);
     let endDate = moment(end);
+
+    error = this._validateAmount(amount);
+    error = this._validateFrequency(freq);
+    error = this._validStartDate(startDate);
 
     if (!startDate.isValid()) {
       error = "Start Date is not a valid date";
@@ -89,6 +90,19 @@ class Show extends Component {
     if (freq < 1) error = "Frequency cannot be less than 1";
 
     if (!Number.isInteger(Number(freq))) error = "Frequency must be an integer";
+    return error;
+  }
+
+  _validStartDate(startDate) {
+    let error = null;
+    if (!startDate.isValid()) error = "Start Date is not a valid date";
+
+    if (startDate.isBefore(moment(coindeskStart)))
+      error = "Start Date cannot be before 2009-01-12 due to API limitations";
+
+    if (startDate.isAfter(moment().subtract(1, "day")))
+      error = "Start Date cannot be after yesterday";
+
     return error;
   }
 
