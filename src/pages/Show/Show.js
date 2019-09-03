@@ -35,13 +35,9 @@ class Show extends Component {
   validateValues(params) {
     const { amount, end, start, freq } = params;
     let error = null;
+    error = this._validateAmount(amount);
+    error = this._validateFrequency(freq);
 
-    if (amount < 1) {
-      error = "Amount cannot be less than 1";
-    }
-    if (freq < 1) {
-      error = "Frequency cannot be less than 1";
-    }
     let startDate = moment(start);
     let endDate = moment(end);
 
@@ -79,6 +75,21 @@ class Show extends Component {
     });
     this.getCoinData(start, end);
     this.getDuration(start, end);
+  }
+
+  _validateAmount(amount) {
+    let error = null;
+    if (Number.isNaN(Number(amount))) error = "Amount must be a number";
+    if (amount < 1) error = "Amount cannot be less than 1";
+    return error;
+  }
+
+  _validateFrequency(freq) {
+    let error = null;
+    if (freq < 1) error = "Frequency cannot be less than 1";
+
+    if (!Number.isInteger(Number(freq))) error = "Frequency must be an integer";
+    return error;
   }
 
   getDuration(start, end) {
