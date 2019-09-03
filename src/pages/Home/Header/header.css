@@ -1,10 +1,11 @@
 .header {
   color: white;
   height: 50px;
-  background: rgba(0, 0, 0, 0.2);
+  background: #222;
   position: fixed;
   width: 100%;
   font-family: Teko;
+  z-index: 100;
 }
 
 .header_link {
