@@ -18,7 +18,7 @@ export default class ButtonDropdown extends Component {
 
   _toggleMenu(state) {
     this.setState({
-      isOpen: state ? state : !this.state.isOpen
+      isOpen: state
     });
   }
 
@@ -31,10 +31,14 @@ export default class ButtonDropdown extends Component {
     const { isOpen } = this.state;
     const { value, menuItems, label, placeholder } = this.props;
     return (
-      <div className="dropdown">
+      <div
+        className="dropdown"
+        onBlur={() => this._toggleMenu(false)}
+        onFocus={() => this._toggleMenu(true)}
+        tabIndex="0"
+      >
         <label className="dropdown__label">{label}</label>
         <button
-          onClick={() => this._toggleMenu()}
           className={`dropdown_button pointer ${
             !value ? "dropdown_button--noValue" : ""
           }`}
