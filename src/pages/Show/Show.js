@@ -4,6 +4,7 @@ import "./Show.css";
 import Header from "../Home/Header/Header";
 import queryString from "query-string";
 import APIURL from "../../constants/API";
+import { coinTypes } from "../../constants/dates";
 import Button from "../../ui/Button/Button";
 import moment from "moment";
 import {
@@ -53,6 +54,7 @@ class Show extends Component {
     error = this._validateFrequency(freq) || error;
     error = this._validateStartDate(startDate) || error;
     error = this._validateEndDate(endDate) || error;
+    error = this._validateCoinType(coinType) || error;
     error = this._validateDatesOverlap(duration) || error;
 
     if (error && error.length > 0) {
@@ -123,6 +125,13 @@ class Show extends Component {
 
   _validateFreqOverDuration(freq, duration) {
     return freq >= duration;
+  }
+
+  _validateCoinType(coinType) {
+    if (!coinType) return "Must have a coin type";
+
+    if (!coinTypes.find(item => item == coinType))
+      return "Coin is currently not supported";
   }
 
   getDuration(a, b) {
