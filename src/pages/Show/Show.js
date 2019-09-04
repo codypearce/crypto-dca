@@ -35,7 +35,7 @@ class Show extends Component {
   };
   componentDidMount() {
     const params = queryString.parse(this.props.location.search);
-    console.log(params);
+
     this.validateValues(params);
   }
 
@@ -157,21 +157,28 @@ class Show extends Component {
     const url = `${APIURL}/coins/${coinType &&
       coinType.toLowerCase()}/${chartType}/${range}`;
 
-    const coinRepsonse = await fetch(url);
+    const coinResponse = await fetch(url);
+    if (coinResponse && coinResponse.status && coinResponse.status == 200) {
+      const coinJson = await coinResponse.json();
 
-    const coinJson = await coinRepsonse.json();
+      if (coinJson && coinJson.prices && coinJson.prices.length > 0) {
+        let coinDataArray = [];
+        coinJson.prices.forEach(item => {
+          coinDataArray.push({
+            date: moment(item[0]).format("MM/DD/YYYY"),
+            value: item[1]
+          });
+        });
 
-    let coinDataArray = [];
-    coinJson.prices.forEach(item => {
-      coinDataArray.push({
-        date: moment(item[0]).format("MM/DD/YYYY"),
-        value: item[1]
-      });
-    });
-
-    this.setState({ coinData: coinDataArray }, () => {
-      this.initializeData();
-    });
+        this.setState({ coinData: coinDataArray }, () => {
+          this.initializeData();
+        });
+      } else {
+        this.setState({ error: "There was a problem grabbing price data" });
+      }
+    } else {
+      this.setState({ error: "There was a problem with the API" });
+    }
   }
   initializeData() {
     const { amount, freq, coinData } = this.state;
@@ -378,7 +385,7 @@ class Show extends Component {
                 maxWidth: 500
               }}
             >
-              {error}.
+              {error}
             </div>
             <div style={{ fontSize: 24, color: "white" }}>
               Please try again with valid data
