@@ -8,3 +8,5 @@ export const frequencyTypes = [
 ];
 export const btcStart = "2009-01-12";
 export const coindeskStart = "2010-07-17";
+
+export const coinTypes = ["Bitcoin", "Ethereum", "Litecoin", "Dogecoin"];

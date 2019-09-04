@@ -7,7 +7,8 @@ import moment from "moment";
 import {
   frequencyTypes,
   btcStart,
-  coindeskStart
+  coindeskStart,
+  coinTypes
 } from "../../../constants/dates";
 
 import ButtonDropdown from "../../../ui/ButtonDropdown/ButtonDropdown";
@@ -25,7 +26,8 @@ class DatesForm extends Component {
     amount: null,
     startDate: null,
     endDate: null,
-    isValid: false
+    isValid: false,
+    coinType: "Bitcoin"
   };
 
   _updateAmount = value => {
@@ -49,6 +51,16 @@ class DatesForm extends Component {
       () => this._isValid()
     );
   }
+
+  _updateCoinType(value) {
+    this.setState(
+      {
+        coinType: value
+      },
+      () => this._isValid()
+    );
+  }
+
   handleChange(value, type) {
     this.setState(
       {
@@ -78,12 +90,12 @@ class DatesForm extends Component {
     return frequencyTable[frequency];
   }
   buildQuery() {
-    const { amount, startDate, endDate } = this.state;
+    const { amount, startDate, endDate, coinType } = this.state;
     const frequencyNumeric = this.getFrequencyNumeric();
     const dateString = `?start=${startDate.format(
       "YYYY-MM-DD"
     )}&end=${endDate.format("YYYY-MM-DD")}`;
-    return `${dateString}&amount=${amount}&freq=${frequencyNumeric}`;
+    return `${dateString}&amount=${amount}&freq=${frequencyNumeric}&coinType=${coinType}`;
   }
   async handleSubmit() {
     const query = this.buildQuery();
@@ -94,16 +106,34 @@ class DatesForm extends Component {
   }
 
   render() {
-    const { frequency, amount, startDate, endDate, isValid } = this.state;
+    const {
+      frequency,
+      amount,
+      startDate,
+      endDate,
+      isValid,
+      coinType
+    } = this.state;
 
     return (
       <div className="DatesForm">
+        <div className="row DatesForm__row DatesForm__row--coinType">
+          <ButtonDropdown
+            value={coinType}
+            onChange={value => this._updateCoinType(value)}
+            menuItems={coinTypes}
+            label={"Coin Type"}
+          />
+        </div>
+
         <div className="row between-xs DatesForm__row">
           <TextInput onChange={this._updateAmount} value={amount} />
           <ButtonDropdown
             value={frequency}
             onChange={value => this._updateFrequency(value)}
             menuItems={frequencyTypes}
+            label={"How Frequent"}
+            placeholder={"Frequency"}
           />
         </div>
         <div className="row between-xs DatesForm__row">

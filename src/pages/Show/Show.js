@@ -34,7 +34,7 @@ class Show extends Component {
   };
   componentDidMount() {
     const params = queryString.parse(this.props.location.search);
-
+    console.log(params);
     this.validateValues(params);
   }
 
@@ -43,7 +43,7 @@ class Show extends Component {
   };
 
   validateValues(params) {
-    const { amount, end, start, freq } = params;
+    const { amount, end, start, freq, coinType } = params;
     let error = null;
     let startDate = moment(start);
     let endDate = moment(end);
@@ -71,7 +71,7 @@ class Show extends Component {
       duration,
       durationDisplay
     });
-    this.getCoinData(start, end);
+    this.getCoinData(start, end, coinType);
   }
 
   _validateAmount(amount) {
@@ -138,14 +138,15 @@ class Show extends Component {
     return this.roundToTwo(value);
   }
 
-  async getCoinData(startDate, endDate) {
+  async getCoinData(startDate, endDate, coinType) {
     const startDateUnix = moment(startDate).format("X");
     const endDateUnix = moment(endDate).format("X");
-    const coinType = "bitcoin";
+
     const chartType = "market_chart";
     const range = `range?vs_currency=usd&from=${startDateUnix}&to=${endDateUnix}`;
 
-    const url = `${APIURL}/coins/${coinType}/${chartType}/${range}`;
+    const url = `${APIURL}/coins/${coinType &&
+      coinType.toLowerCase()}/${chartType}/${range}`;
 
     const coinRepsonse = await fetch(url);
 
@@ -386,7 +387,8 @@ class Show extends Component {
           style={{
             marginTop: 70,
             marginLeft: 24,
-            position: "absolute"
+            position: "absolute",
+            zIndex: 200
           }}
           text={"Back"}
           onClick={() => this.handleSubmit()}

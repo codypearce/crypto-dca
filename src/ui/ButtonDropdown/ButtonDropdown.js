@@ -29,17 +29,17 @@ export default class ButtonDropdown extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { value, menuItems } = this.props;
+    const { value, menuItems, label, placeholder } = this.props;
     return (
       <div className="dropdown">
-        <label className="dropdown__label">How Frequent</label>
+        <label className="dropdown__label">{label}</label>
         <button
           onClick={() => this._toggleMenu()}
           className={`dropdown_button pointer ${
             !value ? "dropdown_button--noValue" : ""
           }`}
         >
-          {value ? value : "Frequency"}
+          {value ? value : placeholder}
         </button>
         <div className={`dropdown_menu ${isOpen ? "dropdown_menu--open" : ""}`}>
           {menuItems.map((item, index) => {

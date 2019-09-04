@@ -6,6 +6,9 @@
 .DatesForm__row {
   margin-bottom: 40px;
 }
+.DatesForm__row--coinType {
+  justify-content: center;
+}
 
 @media (max-width: 500px) {
   .DatesForm__row {
