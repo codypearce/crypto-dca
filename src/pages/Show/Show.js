@@ -139,18 +139,26 @@ class Show extends Component {
   }
 
   async getCoinData(startDate, endDate) {
-    const dateString = `?start=${startDate}&end=${endDate}`;
-    const url = `${APIURL}${dateString}`;
+    const startDateUnix = moment(startDate).format("X");
+    const endDateUnix = moment(endDate).format("X");
+    const coinType = "bitcoin";
+    const chartType = "market_chart";
+    const range = `range?vs_currency=usd&from=${startDateUnix}&to=${endDateUnix}`;
+
+    const url = `${APIURL}/coins/${coinType}/${chartType}/${range}`;
 
     const coinRepsonse = await fetch(url);
+
     const coinJson = await coinRepsonse.json();
+
     let coinDataArray = [];
-    for (const key of Object.keys(coinJson.bpi)) {
+    coinJson.prices.forEach(item => {
       coinDataArray.push({
-        date: key,
-        value: coinJson.bpi[key]
+        date: moment(item[0]).format("MM/DD/YYYY"),
+        value: item[1]
       });
-    }
+    });
+
     this.setState({ coinData: coinDataArray }, () => {
       this.initializeData();
     });
@@ -268,7 +276,9 @@ class Show extends Component {
                     contentStyle={{ background: "#444444", border: "none" }}
                     labelStyle={{ color: "#ebebeb" }}
                     labelFormatter={(value, name, props) => `Date : ${value}`}
-                    formatter={(value, name, props) => `${value}`}
+                    formatter={(value, name, props) =>
+                      `${this.roundToTwo(value)}`
+                    }
                   />
                   <Area
                     type="linear"
@@ -376,8 +386,7 @@ class Show extends Component {
           style={{
             marginTop: 70,
             marginLeft: 24,
-            position: "absolute",
-            zIndex: 200
+            position: "absolute"
           }}
           text={"Back"}
           onClick={() => this.handleSubmit()}
