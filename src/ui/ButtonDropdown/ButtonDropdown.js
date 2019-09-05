@@ -39,6 +39,7 @@ export default class ButtonDropdown extends Component {
       >
         <label className="dropdown__label">{label}</label>
         <button
+          onClick={() => this._toggleMenu(true)}
           className={`dropdown_button pointer ${
             !value ? "dropdown_button--noValue" : ""
           }`}
