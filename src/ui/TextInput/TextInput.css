@@ -7,6 +7,11 @@
   background-color: transparent;
   border-bottom: 2px solid #f7931a;
   text-align: left;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.TextInput__input:hover {
+  cursor: pointer;
 }
 .TextInput__input:focus {
   outline: none;

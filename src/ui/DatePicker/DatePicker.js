@@ -28,6 +28,15 @@ export default class DatePicker extends Component {
       label,
       todayButton
     } = this.props;
+    const CustomDateInput = ({ value, onClick }) => (
+      <button
+        className="TextInput__input"
+        onClick={onClick}
+        style={{ color: !value ? "#777777" : "#fff" }}
+      >
+        {value ? value : "Select a Date"}
+      </button>
+    );
     return (
       <div className="TextInput">
         <label className="TextInput__label">{label}</label>
@@ -44,6 +53,7 @@ export default class DatePicker extends Component {
           className="TextInput__input"
           calendarClassName="Calender"
           fixedHeight
+          customInput={<CustomDateInput />}
         />
       </div>
     );
