@@ -12,29 +12,24 @@ import CryptoAddress from "./ui/CryptoAddress/CryptoAddress";
 class App extends Component {
   render() {
     return (
-      <div style={{ position: "relative" }}>
-        <BrowserRouter>
-          <div
-            style={{
-              position: "relative"
-            }}
-          >
-            <Route exact path="/" component={props => <Home {...props} />} />
-            <Route
-              exact
-              path="/show"
-              component={props => <Show {...props} />}
-            />
-            <Route
-              exact
-              path="/about"
-              component={props => <About {...props} />}
-            />
-            <MountainSVG />
-          </div>
-        </BrowserRouter>
-        <CryptoAddress />
-      </div>
+      <BrowserRouter>
+        <div
+          style={{
+            position: "relative",
+            minHeight: "100vh"
+          }}
+        >
+          <Route exact path="/" component={props => <Home {...props} />} />
+          <Route exact path="/show" component={props => <Show {...props} />} />
+          <Route
+            exact
+            path="/about"
+            component={props => <About {...props} />}
+          />
+          <MountainSVG />
+          <CryptoAddress />
+        </div>
+      </BrowserRouter>
     );
   }
 }
