@@ -1,6 +1,8 @@
 import React from "react";
+import { useMediaQuery } from "react-responsive";
 
 function MountainSVG({}) {
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1200px)" });
   return (
     <svg
       viewBox="0 0 633 534"
@@ -10,7 +12,8 @@ function MountainSVG({}) {
         position: "fixed",
         bottom: 0,
         right: 0,
-        zIndex: -1
+        zIndex: -1,
+        display: isTabletOrMobile ? "none" : "block"
       }}
     >
       <g>
