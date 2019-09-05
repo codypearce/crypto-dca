@@ -26,6 +26,7 @@ import {
   TwitterIcon,
   RedditIcon
 } from "react-share";
+import BackButton from "./Components/BackButton";
 
 class Show extends Component {
   state = {
@@ -398,17 +399,7 @@ class Show extends Component {
     return (
       <div className="Show">
         <Header />
-        <Button
-          type="outline"
-          style={{
-            marginTop: 70,
-            marginLeft: 24,
-            position: "absolute",
-            zIndex: 200
-          }}
-          text={"Back"}
-          onClick={() => this.handleSubmit()}
-        />
+        <BackButton handleSubmit={() => this.handleSubmit()} />
 
         {content}
       </div>
