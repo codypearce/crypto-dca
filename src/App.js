@@ -12,13 +12,11 @@ import CryptoAddress from "./ui/CryptoAddress/CryptoAddress";
 class App extends Component {
   render() {
     return (
-      <div style={{ height: "100%" }}>
+      <div style={{ position: "relative" }}>
         <BrowserRouter>
           <div
             style={{
-              position: "relative",
-              height: "100%",
-              width: "100%"
+              position: "relative"
             }}
           >
             <Route exact path="/" component={props => <Home {...props} />} />
