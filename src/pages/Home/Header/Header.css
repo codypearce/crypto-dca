@@ -49,3 +49,9 @@
   margin-top: 0;
   transform: skewX(-20deg);
 }
+
+@media (max-width: 400px) {
+  .header_title {
+    margin-left: 20px;
+  }
+}
