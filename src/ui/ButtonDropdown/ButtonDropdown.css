@@ -13,6 +13,8 @@
   border-bottom: 2px solid #f7931a;
   text-align: left;
   margin-top: 4px;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 .dropdown_button--noValue {
   color: #777777;

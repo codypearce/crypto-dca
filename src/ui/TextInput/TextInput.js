@@ -16,11 +16,9 @@ export default class TextInput extends Component {
         <label className="TextInput__label">How Much ($)</label>
         <input
           placeholder="Amount in USD"
-          type="number"
           onChange={onChange}
           className="TextInput__input"
           value={value || ""}
-          min="0"
         />
       </div>
     );
