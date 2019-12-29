@@ -2,6 +2,11 @@
 
 A simple Crypto DCA investment graph built with React, Recharts, and the CoinGecko API. The graph shows how much bitcoin, and the percent gained, one will have with equal investments over a period of time. 
 
+
+<p align="center" style="margin-bottom: 0px !important;">
+  <img width="800" src="src/assets/screenshot.png" alt="adf" align="center">
+</p>
+
 ## Tech
  - React
  - Recharts
