@@ -11,18 +11,11 @@ import moment from "moment";
 import { AreaChart, XAxis, Tooltip, Area, ResponsiveContainer } from "recharts";
 import { coindeskStart } from "../../constants/dates";
 
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  RedditShareButton,
-  FacebookIcon,
-  TwitterIcon,
-  RedditIcon
-} from "react-share";
 import BackButton from "./Components/BackButton";
-import GraphError from "./Components/GraphError";
+import InvalidDataError from "./Components/InvalidDataError";
 import Loader from "./Components/Loader";
 import SocialShareRow from "./Components/SocialShareRow";
+import NoGraph from "./Components/NoGraph";
 
 class Show extends Component {
   state = {
@@ -276,18 +269,7 @@ class Show extends Component {
           </div>
           <div style={{ width: "100%" }}>
             {this._validateFreqOverDuration(freq, duration) ? (
-              <div
-                style={{
-                  fontSize: 18,
-                  color: "white",
-                  lineHeight: 1.5,
-                  maxWidth: 500
-                }}
-              >
-                No graph available. Since the frequency is larger than the
-                number of days between the start and end date, there is only one
-                investment.
-              </div>
+              <NoGraph />
             ) : (
               <ResponsiveContainer height={250}>
                 <AreaChart data={dataArr}>
@@ -326,7 +308,7 @@ class Show extends Component {
     let content = !loading ? this._renderContent() : <Loader />;
 
     if (error) {
-      content = <GraphError error={error} />;
+      content = <InvalidDataError error={error} />;
     }
 
     return (

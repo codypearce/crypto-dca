@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function GraphError({ error }) {
+export default function InvalidDataError({ error }) {
   return (
     <div style={styles.wrapper}>
       <div className="card" style={styles.card}>
@@ -46,6 +46,6 @@ const styles = {
   }
 };
 
-GraphError.propTypes = {
+InvalidDataError.propTypes = {
   error: PropTypes.string
 };
