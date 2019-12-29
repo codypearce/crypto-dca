@@ -17,8 +17,8 @@ import SocialShareRow from "./Components/SocialShareRow";
 import NoGraph from "./Components/NoGraph";
 import Graph from "./Components/Graph";
 import Total from "./Components/Total";
-import { roundToTwo } from "../../utils/round";
-import { numberWithCommas } from "../../utils/formatNumbers";
+import AmountInvested from "./Components/AmountInvested";
+import AmountGained from "./Components/AmountGained";
 
 class Show extends Component {
   state = {
@@ -139,13 +139,6 @@ class Show extends Component {
     return duration;
   }
 
-  getGrowth() {
-    const { dollarAmountInvested, investedValue } = this.state;
-    const value =
-      ((investedValue - dollarAmountInvested) / dollarAmountInvested) * 100;
-    return roundToTwo(value);
-  }
-
   async getCoinData(startDate, endDate, coinType) {
     const startDateUnix = moment(startDate).format("X");
     const endDateUnix = moment(endDate).format("X");
@@ -231,28 +224,15 @@ class Show extends Component {
       <div className="Show__body  col-xs-12 middle-xs ">
         <div className="card Show__card">
           <Total coinAmount={coinAmount} investedValue={investedValue} />
-          <div className="row Show__body__row middle-xs">
-            <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
-            <h2 className="RowValue RowValue--small ">
-              ${numberWithCommas(roundToTwo(dollarAmountInvested))}{" "}
-              <span style={{ color: "white", fontSize: 18 }}>in</span>{" "}
-              {durationDisplay}{" "}
-              <span style={{ color: "white", fontSize: 18 }}>months</span>
-            </h2>
-          </div>
+          <AmountInvested
+            dollarAmountInvested={dollarAmountInvested}
+            durationDisplay={durationDisplay}
+          />
+          <AmountGained
+            investedValue={investedValue}
+            dollarAmountInvested={dollarAmountInvested}
+          />
 
-          <div className="row Show__body__row middle-xs">
-            <p className="RowHeading RowHeading--small col-sm-2">Gained</p>
-            <h2 className="RowValue RowValue--small ">
-              $
-              {numberWithCommas(
-                roundToTwo(investedValue - dollarAmountInvested)
-              )}{" "}
-              <span style={{ color: "white", fontSize: 18 }}>for</span>{" "}
-              {this.getGrowth()}%{" "}
-              <span style={{ color: "white", fontSize: 18 }}>growth</span>
-            </h2>
-          </div>
           <div style={{ width: "100%" }}>
             {isValidFreq ? <NoGraph /> : <Graph dataArr={dataArr} />}
           </div>
