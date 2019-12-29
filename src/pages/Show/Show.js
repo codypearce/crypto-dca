@@ -1,22 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import "./Show.css";
 
 import Header from "../Home/Header/Header";
 import queryString from "query-string";
 import APIURL from "../../constants/API";
 import { coinTypes } from "../../constants/dates";
-import Button from "../../ui/Button/Button";
 import moment from "moment";
-import {
-  AreaChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Area,
-  ResponsiveContainer
-} from "recharts";
-import { frequencyTypes, btcStart, coindeskStart } from "../../constants/dates";
+import { AreaChart, XAxis, Tooltip, Area, ResponsiveContainer } from "recharts";
+import { coindeskStart } from "../../constants/dates";
 
 import {
   FacebookShareButton,
@@ -34,6 +27,12 @@ class Show extends Component {
     loading: true,
     error: false
   };
+
+  static propTypes = {
+    location: PropTypes.object,
+    history: PropTypes.object
+  };
+
   componentDidMount() {
     const params = queryString.parse(this.props.location.search);
 
@@ -329,15 +328,7 @@ class Show extends Component {
     );
   }
   render() {
-    const {
-      dollarAmountInvested,
-      coinAmount,
-      dataArr,
-      investedValue,
-      duration,
-      loading,
-      error
-    } = this.state;
+    const { loading, error } = this.state;
 
     let content = !loading ? (
       this._renderContent()

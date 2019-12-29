@@ -7,7 +7,6 @@ import Show from "./pages/Show/Show";
 import About from "./pages/About/About";
 
 import MountainSVG from "./ui/MountainSVG/MountainSVG";
-import CryptoAddress from "./ui/CryptoAddress/CryptoAddress";
 
 class App extends Component {
   render() {
@@ -27,7 +26,6 @@ class App extends Component {
             component={props => <About {...props} />}
           />
           <MountainSVG />
-          <CryptoAddress />
         </div>
       </BrowserRouter>
     );

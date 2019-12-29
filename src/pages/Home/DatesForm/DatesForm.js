@@ -6,7 +6,6 @@ import "./DatesForm.css";
 import moment from "moment";
 import {
   frequencyTypes,
-  btcStart,
   coindeskStart,
   coinTypes
 } from "../../../constants/dates";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 
-function MountainSVG({}) {
+function MountainSVG() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1200px)" });
   return (
     <svg
