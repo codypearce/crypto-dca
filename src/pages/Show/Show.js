@@ -227,6 +227,8 @@ class Show extends Component {
       freq
     } = this.state;
 
+    const isValidFreq = this._validateFreqOverDuration(freq, duration);
+
     return (
       <div className="Show__body  col-xs-12 middle-xs ">
         <div className="card Show__card">
@@ -261,18 +263,10 @@ class Show extends Component {
             </h2>
           </div>
           <div style={{ width: "100%" }}>
-            {this._validateFreqOverDuration(freq, duration) ? (
-              <NoGraph />
-            ) : (
-              <Graph dataArr={dataArr} />
-            )}
+            {isValidFreq ? <NoGraph /> : <Graph dataArr={dataArr} />}
           </div>
         </div>
-        {this._validateFreqOverDuration(freq, duration) ? (
-          ""
-        ) : (
-          <SocialShareRow />
-        )}
+        {isValidFreq ? "" : <SocialShareRow />}
       </div>
     );
   }
