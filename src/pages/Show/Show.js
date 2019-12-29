@@ -16,7 +16,9 @@ import Loader from "./Components/Loader";
 import SocialShareRow from "./Components/SocialShareRow";
 import NoGraph from "./Components/NoGraph";
 import Graph from "./Components/Graph";
-import { roundToTwo, roundToFive } from "../../utils/round";
+import Total from "./Components/Total";
+import { roundToTwo } from "../../utils/round";
+import { numberWithCommas } from "../../utils/formatNumbers";
 
 class Show extends Component {
   state = {
@@ -206,10 +208,6 @@ class Show extends Component {
     }, 500);
   }
 
-  numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
   handleSubmit() {
     this.props.history.push({
       pathname: "/"
@@ -232,18 +230,11 @@ class Show extends Component {
     return (
       <div className="Show__body  col-xs-12 middle-xs ">
         <div className="card Show__card">
-          <div className="row Show__body__row middle-xs">
-            <p className="RowHeading col-sm-2 ">Total</p>
-            <h2 className="RowValue">
-              ${this.numberWithCommas(roundToTwo(investedValue))}{" "}
-              <span style={{ color: "white" }}>/</span>{" "}
-              {roundToFive(coinAmount)}
-            </h2>
-          </div>
+          <Total coinAmount={coinAmount} investedValue={investedValue} />
           <div className="row Show__body__row middle-xs">
             <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
             <h2 className="RowValue RowValue--small ">
-              ${this.numberWithCommas(roundToTwo(dollarAmountInvested))}{" "}
+              ${numberWithCommas(roundToTwo(dollarAmountInvested))}{" "}
               <span style={{ color: "white", fontSize: 18 }}>in</span>{" "}
               {durationDisplay}{" "}
               <span style={{ color: "white", fontSize: 18 }}>months</span>
@@ -254,7 +245,7 @@ class Show extends Component {
             <p className="RowHeading RowHeading--small col-sm-2">Gained</p>
             <h2 className="RowValue RowValue--small ">
               $
-              {this.numberWithCommas(
+              {numberWithCommas(
                 roundToTwo(investedValue - dollarAmountInvested)
               )}{" "}
               <span style={{ color: "white", fontSize: 18 }}>for</span>{" "}
