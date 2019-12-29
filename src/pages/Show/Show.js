@@ -20,6 +20,7 @@ import {
   RedditIcon
 } from "react-share";
 import BackButton from "./Components/BackButton";
+import GraphError from "./Components/GraphError";
 
 class Show extends Component {
   state = {
@@ -351,40 +352,7 @@ class Show extends Component {
     );
 
     if (error) {
-      content = (
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            pointerEvents: "none"
-          }}
-        >
-          <div className="card" style={{ padding: 8 }}>
-            <div style={{ fontSize: 48, color: "#c0392b" }}>Error</div>
-            <div
-              style={{
-                fontSize: 32,
-                color: "white",
-                marginBottom: 16,
-                marginTop: 8,
-                maxWidth: 500
-              }}
-            >
-              {error}
-            </div>
-            <div style={{ fontSize: 24, color: "white" }}>
-              Please try again with valid data
-            </div>
-          </div>
-        </div>
-      );
+      content = <GraphError error={error} />;
     }
 
     return (
