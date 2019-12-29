@@ -21,6 +21,7 @@ import {
 } from "react-share";
 import BackButton from "./Components/BackButton";
 import GraphError from "./Components/GraphError";
+import Loader from "./Components/Loader";
 
 class Show extends Component {
   state = {
@@ -331,25 +332,7 @@ class Show extends Component {
   render() {
     const { loading, error } = this.state;
 
-    let content = !loading ? (
-      this._renderContent()
-    ) : (
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          pointerEvents: "none"
-        }}
-      >
-        <div className="loader">Loading</div>
-      </div>
-    );
+    let content = !loading ? this._renderContent() : <Loader />;
 
     if (error) {
       content = <GraphError error={error} />;
