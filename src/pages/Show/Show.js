@@ -22,6 +22,7 @@ import {
 import BackButton from "./Components/BackButton";
 import GraphError from "./Components/GraphError";
 import Loader from "./Components/Loader";
+import SocialShareRow from "./Components/SocialShareRow";
 
 class Show extends Component {
   state = {
@@ -314,17 +315,7 @@ class Show extends Component {
         {this._validateFreqOverDuration(freq, duration) ? (
           ""
         ) : (
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <FacebookShareButton url={window.location.href}>
-              <FacebookIcon size={28} />
-            </FacebookShareButton>
-            <TwitterShareButton url={window.location.href}>
-              <TwitterIcon size={28} />
-            </TwitterShareButton>
-            <RedditShareButton url={window.location.href}>
-              <RedditIcon size={28} />
-            </RedditShareButton>
-          </div>
+          <SocialShareRow />
         )}
       </div>
     );
