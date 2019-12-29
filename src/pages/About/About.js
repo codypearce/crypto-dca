@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./About.css";
 
-import Header from "../Home/Header/Header";
+import Header from "../../ui//Header/Header";
 
 class About extends Component {
   render() {
