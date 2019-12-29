@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./ButtonDropdown.css";
 
 const ButtonDropdownMenuItem = ({ onClick, menuValue }) => {
@@ -7,6 +8,11 @@ const ButtonDropdownMenuItem = ({ onClick, menuValue }) => {
       {menuValue}
     </div>
   );
+};
+
+ButtonDropdownMenuItem.propTypes = {
+  onClick: PropTypes.func,
+  menuValue: PropTypes.string
 };
 
 export default ButtonDropdownMenuItem;

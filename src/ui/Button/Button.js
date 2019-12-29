@@ -20,7 +20,10 @@ const Button = ({ text, type, onClick, style, disabled, ...props }) => {
 
 Button.propTypes = {
   text: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  type: PropTypes.string,
+  style: PropTypes.object,
+  disabled: PropTypes.bool
 };
 
 export default Button;

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./Show.css";
 
-import Header from "../Home/Header/Header";
+import Header from "../../ui//Header/Header";
 import queryString from "query-string";
 import APIURL from "../../constants/API";
 import { coinTypes } from "../../constants/dates";

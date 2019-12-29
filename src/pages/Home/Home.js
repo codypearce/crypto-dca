@@ -1,10 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import "./Home.css";
 
-import Header from "./Header/Header";
+import Header from "../../ui//Header/Header";
 import DatesForm from "./DatesForm/DatesForm";
 
 class Home extends Component {
+  static propTypes = {
+    history: PropTypes.object
+  };
   render() {
     return (
       <div className="home">

@@ -9,7 +9,9 @@ export default class ButtonDropdown extends Component {
   static propTypes = {
     menuItems: PropTypes.array,
     value: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    label: PropTypes.string,
+    placeholder: PropTypes.string
   };
 
   state = {
