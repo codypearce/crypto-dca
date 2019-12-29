@@ -10,7 +10,7 @@ import {
 
 export default function SocialShareRow() {
   return (
-    <div style={styles.row}>
+    <div style={styles.wrapper}>
       <FacebookShareButton url={window.location.href}>
         <FacebookIcon size={28} />
       </FacebookShareButton>

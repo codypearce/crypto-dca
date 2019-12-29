@@ -8,7 +8,6 @@ import queryString from "query-string";
 import APIURL from "../../constants/API";
 import { coinTypes } from "../../constants/dates";
 import moment from "moment";
-import { AreaChart, XAxis, Tooltip, Area, ResponsiveContainer } from "recharts";
 import { coindeskStart } from "../../constants/dates";
 
 import BackButton from "./Components/BackButton";
@@ -16,6 +15,8 @@ import InvalidDataError from "./Components/InvalidDataError";
 import Loader from "./Components/Loader";
 import SocialShareRow from "./Components/SocialShareRow";
 import NoGraph from "./Components/NoGraph";
+import Graph from "./Components/Graph";
+import { roundToTwo, roundToFive } from "../../utils/round";
 
 class Show extends Component {
   state = {
@@ -140,7 +141,7 @@ class Show extends Component {
     const { dollarAmountInvested, investedValue } = this.state;
     const value =
       ((investedValue - dollarAmountInvested) / dollarAmountInvested) * 100;
-    return this.roundToTwo(value);
+    return roundToTwo(value);
   }
 
   async getCoinData(startDate, endDate, coinType) {
@@ -205,14 +206,6 @@ class Show extends Component {
     }, 500);
   }
 
-  roundToTwo(num) {
-    return +(Math.round(num + "e+2") + "e-2");
-  }
-
-  roundToFive(num) {
-    return +(Math.round(num + "e+5") + "e-5");
-  }
-
   numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -240,15 +233,15 @@ class Show extends Component {
           <div className="row Show__body__row middle-xs">
             <p className="RowHeading col-sm-2 ">Total</p>
             <h2 className="RowValue">
-              ${this.numberWithCommas(this.roundToTwo(investedValue))}{" "}
+              ${this.numberWithCommas(roundToTwo(investedValue))}{" "}
               <span style={{ color: "white" }}>/</span>{" "}
-              {this.roundToFive(coinAmount)}
+              {roundToFive(coinAmount)}
             </h2>
           </div>
           <div className="row Show__body__row middle-xs">
             <p className="RowHeading RowHeading--small col-sm-2">Invested</p>
             <h2 className="RowValue RowValue--small ">
-              ${this.numberWithCommas(this.roundToTwo(dollarAmountInvested))}{" "}
+              ${this.numberWithCommas(roundToTwo(dollarAmountInvested))}{" "}
               <span style={{ color: "white", fontSize: 18 }}>in</span>{" "}
               {durationDisplay}{" "}
               <span style={{ color: "white", fontSize: 18 }}>months</span>
@@ -260,7 +253,7 @@ class Show extends Component {
             <h2 className="RowValue RowValue--small ">
               $
               {this.numberWithCommas(
-                this.roundToTwo(investedValue - dollarAmountInvested)
+                roundToTwo(investedValue - dollarAmountInvested)
               )}{" "}
               <span style={{ color: "white", fontSize: 18 }}>for</span>{" "}
               {this.getGrowth()}%{" "}
@@ -271,26 +264,7 @@ class Show extends Component {
             {this._validateFreqOverDuration(freq, duration) ? (
               <NoGraph />
             ) : (
-              <ResponsiveContainer height={250}>
-                <AreaChart data={dataArr}>
-                  <XAxis hide dataKey={"date"} />
-                  <Tooltip
-                    contentStyle={{ background: "#444444", border: "none" }}
-                    labelStyle={{ color: "#ebebeb" }}
-                    labelFormatter={(value, name, props) => `Date : ${value}`}
-                    formatter={(value, name, props) =>
-                      `${this.roundToTwo(value)}`
-                    }
-                  />
-                  <Area
-                    type="linear"
-                    dataKey="Total"
-                    stroke="none"
-                    fillOpacity={1}
-                    fill="#f7931a"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
+              <Graph dataArr={dataArr} />
             )}
           </div>
         </div>
