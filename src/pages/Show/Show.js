@@ -15,9 +15,8 @@ import Loader from "./Components/Loader";
 import SocialShareRow from "./Components/SocialShareRow";
 import NoGraph from "./Components/NoGraph";
 import Graph from "./Components/Graph";
-import Total from "./Components/Total";
-import AmountInvested from "./Components/AmountInvested";
-import AmountGained from "./Components/AmountGained";
+import Totals from "./Components/Totals";
+
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
@@ -207,28 +206,23 @@ class Show extends Component {
 
   _renderContent() {
     const {
-      dollarAmountInvested,
-      coinAmount,
       dataArr,
-      investedValue,
       durationDisplay,
       duration,
-      freq
+      freq,
+      coinData,
+      amount
     } = this.state;
-
     const isValidFreq = this._validateFreqOverDuration(freq, duration);
 
     return (
       <div className="Show__body  col-xs-12 middle-xs ">
         <div className="card Show__card">
-          <Total coinAmount={coinAmount} investedValue={investedValue} />
-          <AmountInvested
-            dollarAmountInvested={dollarAmountInvested}
+          <Totals
+            priceArr={coinData}
+            freqInDays={freq}
+            amountToInvest={amount}
             durationDisplay={durationDisplay}
-          />
-          <AmountGained
-            investedValue={investedValue}
-            dollarAmountInvested={dollarAmountInvested}
           />
 
           <div style={{ width: "100%" }}>
