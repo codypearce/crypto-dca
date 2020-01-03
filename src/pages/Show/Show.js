@@ -7,7 +7,6 @@ import Header from "../../ui//Header/Header";
 import queryString from "query-string";
 import APIURL from "../../constants/API";
 import { coinTypes } from "../../constants/dates";
-import moment from "moment";
 import { coindeskStart } from "../../constants/dates";
 
 import BackButton from "./Components/BackButton";
@@ -19,6 +18,9 @@ import Graph from "./Components/Graph";
 import Total from "./Components/Total";
 import AmountInvested from "./Components/AmountInvested";
 import AmountGained from "./Components/AmountGained";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+dayjs.extend(advancedFormat);
 
 class Show extends Component {
   state = {
@@ -45,8 +47,8 @@ class Show extends Component {
   validateValues(params) {
     const { amount, end, start, freq, coinType } = params;
     let error = null;
-    let startDate = moment(start);
-    let endDate = moment(end);
+    let startDate = dayjs(start);
+    let endDate = dayjs(end);
     let duration = this.getDuration(startDate, endDate);
 
     error = this._validateAmount(amount) || error;
@@ -94,10 +96,10 @@ class Show extends Component {
     let error = null;
     if (!startDate.isValid()) error = "Start Date is not a valid date";
 
-    if (startDate.isBefore(moment(coindeskStart)))
+    if (startDate.isBefore(dayjs(coindeskStart)))
       error = "Start Date cannot be before 2009-01-12";
 
-    if (startDate.isAfter(moment().subtract(1, "day")))
+    if (startDate.isAfter(dayjs().subtract(1, "day")))
       error = "Start Date cannot be after yesterday";
 
     return error;
@@ -110,10 +112,10 @@ class Show extends Component {
       error = "End Date is not a valid date";
     }
 
-    if (endDate.isBefore(moment(coindeskStart).add(1, "day")))
+    if (endDate.isBefore(dayjs(coindeskStart).add(1, "day")))
       error = "End Date cannot be before 2009-01-13";
 
-    if (endDate.isAfter(moment())) error = "End Date cannot be after today";
+    if (endDate.isAfter(dayjs())) error = "End Date cannot be after today";
 
     return error;
   }
@@ -140,8 +142,8 @@ class Show extends Component {
   }
 
   async getCoinData(startDate, endDate, coinType) {
-    const startDateUnix = moment(startDate).format("X");
-    const endDateUnix = moment(endDate).format("X");
+    const startDateUnix = dayjs(startDate).format("X");
+    const endDateUnix = dayjs(endDate).format("X");
 
     const chartType = "market_chart";
     const range = `range?vs_currency=usd&from=${startDateUnix}&to=${endDateUnix}`;
@@ -150,19 +152,11 @@ class Show extends Component {
       coinType.toLowerCase()}/${chartType}/${range}`;
 
     const coinResponse = await fetch(url);
-    if (coinResponse && coinResponse.status && coinResponse.status == 200) {
-      const coinJson = await coinResponse.json();
+    if (coinResponse && coinResponse.status && coinResponse.status === 200) {
+      const coinData = await coinResponse.json();
 
-      if (coinJson && coinJson.prices && coinJson.prices.length > 0) {
-        let coinDataArray = [];
-        coinJson.prices.forEach(item => {
-          coinDataArray.push({
-            date: moment(item[0]).format("MM/DD/YYYY"),
-            value: item[1]
-          });
-        });
-
-        this.setState({ coinData: coinDataArray }, () => {
+      if (coinData && coinData.prices && coinData.prices.length > 0) {
+        this.setState({ coinData: coinData.prices }, () => {
           this.initializeData();
         });
       } else {
@@ -180,22 +174,26 @@ class Show extends Component {
     let dataArr = [];
     for (let i = 0; i < coinData.length; i += Number(freq)) {
       dollarAmountInvested += Number(amount);
-      coinAmount += amount / coinData[i].value;
+      coinAmount += amount / coinData[i][1];
 
       dataArr.push({
         dollarAmountInvested,
         coinAmount,
-        coinValue: coinData[i].value,
-        Total: coinAmount * coinData[i].value,
-        date: coinData[i].date
+        coinValue: coinData[i][1],
+        Total: coinAmount * coinData[i][1],
+        date: dayjs(coinData[i][0].date).format("MM/DD/YYYY")
       });
     }
+
+    const investedValue = coinAmount * coinData[coinData.length - 1][1];
+
     this.setState({
       dollarAmountInvested,
       coinAmount,
       dataArr,
-      investedValue: coinAmount * coinData[coinData.length - 1].value
+      investedValue
     });
+
     this.timeout = setTimeout(() => {
       this.setState({ loading: false });
     }, 500);

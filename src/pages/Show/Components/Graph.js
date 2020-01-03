@@ -4,6 +4,7 @@ import { AreaChart, XAxis, Tooltip, Area, ResponsiveContainer } from "recharts";
 import { roundToTwo } from "../../../utils/round";
 
 export default function Graph({ dataArr }) {
+  console.log(dataArr);
   return (
     <ResponsiveContainer height={250}>
       <AreaChart data={dataArr}>
