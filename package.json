@@ -14,7 +14,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.3",
     "react-share": "^3.0.1",
-    "recharts": "^1.7.1"
+    "recharts": "^2.1.14"
   },
   "scripts": {
     "start": "react-scripts start",
